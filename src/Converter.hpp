@@ -7,6 +7,7 @@ using namespace std;
 
 class Converter {
     char getNthNucleotide(int oligo, int n) const;
+    char getNthNucleotide(char nucleotide) const;
 
     public:
         Converter();

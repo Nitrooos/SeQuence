@@ -4,7 +4,11 @@
 Converter::Converter() { }
 
 int Converter::convert(string const& oligo) const {
+    int result = 0;
+    for (int i = 0; i < oligo.size(); ++i)
+        result |= (getNthNucleotide(oligo[i]) << 2*i);
 
+    return result;
 }
 
 string Converter::convert(int oligo, int base_pairs) const {
@@ -25,5 +29,14 @@ char Converter::getNthNucleotide(int oligo, int n) const {
         case 1: return 'C';
         case 2: return 'T';
         case 3: return 'G';
+    }
+}
+
+char Converter::getNthNucleotide(char nucleotide) const {
+    switch (nucleotide) {
+        case 'A': return 0;
+        case 'C': return 1;
+        case 'T': return 2;
+        case 'G': return 3;
     }
 }
