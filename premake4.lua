@@ -28,10 +28,12 @@ solution "Genome Sequencing"
             language "C++"
             kind "ConsoleApp"
             files "test/*.cpp"
-            buildoptions { "-w -Wall" }
+            files "src/*.cpp"
+            excludes "src/Application.cpp"
+            buildoptions { "-w -Wall -std=c++11" }
             linkoptions { "-lcppunit" }
             objdir "obj/test"
-        
+
         configuration { "debug" }
             targetdir "debug"
             flags "Symbols"
