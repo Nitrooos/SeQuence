@@ -3,7 +3,7 @@
 
 int main() {
     Converter c;
-    c.convert();
+    std::cout << c.convert(0xE4, 4) << "\n";
 
     return 0;
 }

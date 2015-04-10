@@ -1,6 +1,6 @@
 solution "Genome Sequencing"
 
-    project "Converter"
+    project "SeQuence"
         configurations { "debug", "release" }
             language "C++"
             kind "ConsoleApp"
@@ -23,7 +23,7 @@ solution "Genome Sequencing"
             os.rmdir("obj")
         end
 
-    project "ConverterTest"
+    project "SeQuenceTest"
         configurations { "debug" }
             language "C++"
             kind "ConsoleApp"
