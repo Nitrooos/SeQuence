@@ -22,18 +22,18 @@ class ConverterTest : public CppUnit::TestCase {
 
     public:
         void runTest() {
-            // Converter c;
-            //
-            // srand((unsigned)time(NULL));
-            // int randomLength;
-            // string randomSequence, processedSequence;
-            // for (int i = 0; i < 100; ++i) {
-            //     randomLength      = rand()%15 + 1;
-            //     randomSequence    = generateRandomSequence(randomLength);
-            //     processedSequence = c.convert(c.convert(randomSequence), randomLength);
-            //
-            //     CPPUNIT_ASSERT_MESSAGE("Converter changed sequence during conversion!",
-            //         randomSequence == processedSequence);
-            // }
+            Converter c;
+
+            srand((unsigned)time(NULL));
+            int randomLength;
+            string randomSequence, processedSequence;
+            for (int i = 0; i < 100; ++i) {
+                randomLength      = rand()%15 + 1;
+                randomSequence    = generateRandomSequence(randomLength);
+                processedSequence = c.convert(c.convert(randomSequence), randomLength);
+
+                CPPUNIT_ASSERT_MESSAGE("Converter changed sequence during conversion!",
+                    randomSequence == processedSequence);
+            }
         }
 };
