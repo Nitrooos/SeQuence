@@ -4,6 +4,12 @@
 #include <stdlib.h>
 
 class ConverterTest : public CppUnit::TestCase {
+    CPPUNIT_TEST_SUITE(ConverterTest);
+    CPPUNIT_TEST(conversionTest);
+    CPPUNIT_TEST_SUITE_END();
+
+    Converter c;
+
     char getRandomNucleotide() const {
         switch (rand()%4) {
             case 0: return 'A';
@@ -21,10 +27,11 @@ class ConverterTest : public CppUnit::TestCase {
     }
 
     public:
-        void runTest() {
-            Converter c;
-
+        void setUp() {
             srand((unsigned)time(NULL));
+        }
+
+        void conversionTest() {
             int randomLength;
             string randomSequence, processedSequence;
             for (int i = 0; i < 100; ++i) {
@@ -37,3 +44,5 @@ class ConverterTest : public CppUnit::TestCase {
             }
         }
 };
+
+CPPUNIT_TEST_SUITE_REGISTRATION(ConverterTest);
