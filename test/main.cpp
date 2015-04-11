@@ -10,6 +10,7 @@
 #include <cppunit/CompilerOutputter.h>
 
 #include "ConverterTest.hpp"
+#include "InstanceLoaderTest.hpp"
 
 int main () {
     // informs test-listener about testresults
