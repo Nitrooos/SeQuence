@@ -17,6 +17,8 @@ void InstanceLoader::run(string file, vector<Vertex> &vertexes) const {
     while (F >> oligonucleotide) {
         vertexes.push_back(Vertex(c.convert(oligonucleotide)));
     }
+
+    this->addSuccessorsToVertexes(vertexes);
 }
 
 void InstanceLoader::addSuccessorsToVertexes(vector<Vertex> &vertexes) const {
@@ -29,13 +31,17 @@ void InstanceLoader::addSuccessorsToVertexes(vector<Vertex> &vertexes) const {
 }
 
 int InstanceLoader::commonPart(Vertex const& vertex, Vertex const& candidate) const {
-    int bp_per_nuc = Options::getBasePairsPerOligonucleotide(),
-        bytes_per_int = Options::getBytesPerInt();
+    unsigned int initialMask = ((unsigned)(~0) >>
+                                (8*Options::getBytesPerInt() - 2*Options::getBasePairsPerOligonucleotide()));
 
-    for (int i = 1; i < Options::getBasePairsPerOligonucleotide(); ++i)
+    for (int i = 1; i < Options::getBasePairsPerOligonucleotide(); ++i) {
+        int tempV = (vertex.getValue() >> 2*i),
+            tempC = candidate.getValue() & (initialMask >> 2*i);
         // sprawdź czy kandydat ma 10 - i wspólnych zasad z wyjątkiem pierwszej
         // z badanym oligonukleotydem
-        if (candidate.getValue() & (vertex.getValue() >> 2*i) == (-1 >> (8*bytes_per_int - 2*bp_per_nuc)))
+        if ((tempV ^ tempC) == 0 )
             return 10 - i;
+    }
+
     return 0;
 }
