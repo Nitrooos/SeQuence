@@ -12,7 +12,6 @@ class InstanceLoader {
 
     public:
         InstanceLoader();
-        int commonPart(Vertex const& v1, Vertex const& v2) const;
         void run(string file, vector<Vertex> &vertexes) const;
 };
 

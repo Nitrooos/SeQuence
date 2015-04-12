@@ -11,6 +11,7 @@
 
 #include "ConverterTest.hpp"
 #include "InstanceLoaderTest.hpp"
+#include "HelpersTest.hpp"
 
 int main () {
     // informs test-listener about testresults
