@@ -12,7 +12,7 @@ class Converter {
     public:
         Converter();
         int convert(string const& oligo) const;
-        string convert(int oligo, int base_pairs = 10) const;
+        string convert(int oligo) const;
 };
 
 #endif  // CONVERTER

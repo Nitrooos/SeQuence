@@ -2,8 +2,8 @@
 
 Vertex::Vertex(int oligo) : oligonucleotide(oligo) {}
 
-void Vertex::addSuccessor(Vertex *v) {
-    // TO DO
+void Vertex::addSuccessor(Vertex *v, int commonPart) {
+    successors.insert(make_pair(v, commonPart));
 }
 
 int Vertex::getValue() const {

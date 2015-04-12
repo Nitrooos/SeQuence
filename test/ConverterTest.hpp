@@ -1,4 +1,5 @@
 #include "../src/Converter.hpp"
+#include "../src/Options.hpp"
 
 #include <time.h>
 #include <stdlib.h>
@@ -32,12 +33,10 @@ class ConverterTest : public CppUnit::TestCase {
         }
 
         void conversionTest() {
-            int randomLength;
             string randomSequence, processedSequence;
             for (int i = 0; i < 100; ++i) {
-                randomLength      = rand()%15 + 1;
-                randomSequence    = generateRandomSequence(randomLength);
-                processedSequence = c.convert(c.convert(randomSequence), randomLength);
+                randomSequence    = generateRandomSequence(Options::getBasePairsPerOligonucleotide());
+                processedSequence = c.convert(c.convert(randomSequence));
 
                 CPPUNIT_ASSERT_MESSAGE("Converter changed sequence during conversion!",
                     randomSequence == processedSequence);

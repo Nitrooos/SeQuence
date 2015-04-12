@@ -1,4 +1,5 @@
 #include "Converter.hpp"
+#include "Options.hpp"
 #include "Exceptions.hpp"
 
 Converter::Converter() { }
@@ -11,7 +12,8 @@ int Converter::convert(string const& oligo) const {
     return result;
 }
 
-string Converter::convert(int oligo, int base_pairs) const {
+string Converter::convert(int oligo) const {
+    int base_pairs = Options::getBasePairsPerOligonucleotide();
     if (sizeof(int)*8 < base_pairs)
         throw NoEnoughSpaceInInt(base_pairs);
 

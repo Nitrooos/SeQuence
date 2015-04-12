@@ -13,7 +13,7 @@ class Vertex {
 
     public:
         Vertex(int oligo);
-        void addSuccessor(Vertex *v);
+        void addSuccessor(Vertex *v, int commonPart);
         int getValue() const;
 };
 
