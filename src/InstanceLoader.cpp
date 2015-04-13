@@ -3,6 +3,7 @@
 #include "Vertex.hpp"
 #include "Options.hpp"
 #include "Helpers.hpp"
+#include "Exceptions.hpp"
 
 #include <fstream>
 
@@ -10,6 +11,8 @@ InstanceLoader::InstanceLoader() {}
 
 void InstanceLoader::run(string file, vector<Vertex> &vertexes) const {
     ifstream F(file);
+    if (F.fail())
+        throw CannotOpenInstanceFileError(file);
 
     string oligonucleotide;
     Converter c;

@@ -16,4 +16,14 @@ struct NoEnoughSpaceInInt : public exception {
         int base_pairs;
 };
 
+struct CannotOpenInstanceFileError : public exception {
+    CannotOpenInstanceFileError(string filename) : filename(filename) { }
+    const char *what() const throw() {
+        return string("Cannot open instance file: " + filename + ":\nIt's a valid path?").c_str();
+    }
+
+    protected:
+        string filename;
+};
+
 #endif  /* EXCEPTIONS_HPP */
