@@ -10,6 +10,10 @@ Options& Options::getInstance() {
     return instance;
 }
 
+string Options::getInstanceFilename() {
+    return instanceFilename;
+}
+
 int Options::getMinCommonPart() {
     return minCommonPart;
 }
@@ -24,6 +28,10 @@ int Options::getSolutionsNumber() {
 
 int Options::getTimeout() {
     return timeout;
+}
+
+void Options::setInstanceFilename(string file) {
+    this->instanceFilename = file;
 }
 
 void Options::setMinCommonPart(int minCommonPart) {
