@@ -27,7 +27,7 @@ void Parser::showHelpInfo(char *programName) {
     cout << "Usage:   " << programName << " [-option] [argument]\n"
          << "Options:\n\t"
          << "-h   show help information\n"
-         << "-f   instance file\n"
+         << "\t" << "-f   instance file\n"
          << "\t" << "-s   number of solutions to find (default 1)\n"
          << "\t" << "-m   minimal common part of two oligonucleotides sufficient to connect them (default 7)\n"
          << "\t" << "-t   maximal time of computations in seconds, after which program stops (default no limit)\n"
