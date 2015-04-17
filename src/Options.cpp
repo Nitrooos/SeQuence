@@ -2,7 +2,8 @@
 #include "Exceptions.hpp"
 
 Options::Options()
-    : minCommonPart(7), basePairsPerOligonucleotide(10), solutionsNumber(1), timeout(-1) {}
+    : minCommonPart(7), basePairsPerOligonucleotide(10), solutionsNumber(1), timeout(-1),
+      logFilename("log"), resultsFilename("results") {}
 
 Options& Options::getInstance() {
     static Options instance;
@@ -12,6 +13,14 @@ Options& Options::getInstance() {
 
 string Options::getInstanceFilename() {
     return instanceFilename;
+}
+
+string Options::getLogFilename() {
+    return logFilename;
+}
+
+string Options::getResultsFilename() {
+    return resultsFilename;
 }
 
 int Options::getMinCommonPart() {
@@ -32,6 +41,14 @@ int Options::getTimeout() {
 
 void Options::setInstanceFilename(string file) {
     this->instanceFilename = file;
+}
+
+void Options::setLogFilename(string file) {
+    this->logFilename = file;
+}
+
+void Options::setResultsFilename(string file) {
+    this->resultsFilename = file;
 }
 
 void Options::setMinCommonPart(int minCommonPart) {
