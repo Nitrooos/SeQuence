@@ -2,6 +2,7 @@
 #define EXCEPTIONS_HPP
 
 #include <exception>
+#include <string>
 
 using namespace std;
 

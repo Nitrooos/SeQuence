@@ -13,9 +13,7 @@ int Converter::convert(string const& oligo) const {
 }
 
 string Converter::convert(int oligo) const {
-    int base_pairs = Options::getBasePairsPerOligonucleotide();
-    if (sizeof(int)*8 < base_pairs)
-        throw NoEnoughSpaceInInt(base_pairs);
+    int base_pairs = Options::getInstance().getBasePairsPerOligonucleotide();
 
     string result = "";
     for (int i = 0; i < base_pairs; ++i)

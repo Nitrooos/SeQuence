@@ -35,7 +35,7 @@ class ConverterTest : public CppUnit::TestCase {
         void conversionTest() {
             string randomSequence, processedSequence;
             for (int i = 0; i < 100; ++i) {
-                randomSequence    = generateRandomSequence(Options::getBasePairsPerOligonucleotide());
+                randomSequence    = generateRandomSequence(Options::getInstance().getBasePairsPerOligonucleotide());
                 processedSequence = c.convert(c.convert(randomSequence));
 
                 CPPUNIT_ASSERT_MESSAGE("Converter changed sequence during conversion!",

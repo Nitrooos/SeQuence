@@ -19,6 +19,12 @@ void InstanceLoader::run(string file, vector<Vertex> &vertexes) const {
 
     vertexes.clear();
     while (F >> oligonucleotide) {
+        static bool firstOligonucleotide = true;
+        if (firstOligonucleotide) {
+            Options::getInstance().setBasePairsPerOligonucleotide(oligonucleotide.size());
+            firstOligonucleotide = false;
+        }
+
         vertexes.push_back(Vertex(c.convert(oligonucleotide)));
     }
 
@@ -29,7 +35,7 @@ void InstanceLoader::addSuccessorsToVertexes(vector<Vertex> &vertexes) const {
     for (auto &vertex : vertexes)
         for (auto &cand : vertexes) {
             int common = CommonPart::get(vertex, cand);
-            if (common >= Options::getMinCommonPart())
+            if (common >= Options::getInstance().getMinCommonPart())
                 vertex.addSuccessor(&cand, common);
         }
 }
