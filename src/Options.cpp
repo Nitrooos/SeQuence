@@ -1,4 +1,5 @@
 #include "Options.hpp"
+#include "CommandLineParser.hpp"
 #include "Exceptions.hpp"
 
 Options::Options()
@@ -9,6 +10,27 @@ Options& Options::getInstance() {
     static Options instance;
 
     return instance;
+}
+
+void Options::load(int argc, char *argv[]) {
+    map<string, string> options = Parser::setProgramOptions(argc, argv);
+
+    this->instanceFilename = options["f"];
+    if (options.find("l") != options.end())
+        this->logFilename = options["l"];
+    if (options.find("r") != options.end())
+        this->resultsFilename = options["r"];
+
+    if (options.find("s") != options.end())
+        this->solutionsNumber = stoul(options["s"]);
+    if (options.find("m") != options.end())
+        this->minCommonPart = stoul(options["m"]);
+    if (options.find("t") != options.end())
+        this->timeout = stoul(options["t"]);
+}
+
+void Options::setBasePairsPerOligonucleotide(int bpPerOligo) {
+    this->basePairsPerOligonucleotide = bpPerOligo;
 }
 
 string Options::getInstanceFilename() {
@@ -37,35 +59,4 @@ int Options::getSolutionsNumber() {
 
 int Options::getTimeout() {
     return timeout;
-}
-
-void Options::setInstanceFilename(string file) {
-    this->instanceFilename = file;
-}
-
-void Options::setLogFilename(string file) {
-    this->logFilename = file;
-}
-
-void Options::setResultsFilename(string file) {
-    this->resultsFilename = file;
-}
-
-void Options::setMinCommonPart(int minCommonPart) {
-    this->minCommonPart = minCommonPart;
-}
-
-void Options::setBasePairsPerOligonucleotide(int bpPerOligo) {
-    if (getBytesPerInt()*8 < bpPerOligo*2)
-        throw NoEnoughSpaceInInt(bpPerOligo);
-
-    this->basePairsPerOligonucleotide = bpPerOligo;
-}
-
-void Options::setSolutionsNumber(int solutionsNumber) {
-    this->solutionsNumber = solutionsNumber;
-}
-
-void Options::setTimeout(int timeout) {
-    this->timeout = timeout;
 }

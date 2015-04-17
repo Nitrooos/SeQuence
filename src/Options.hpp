@@ -2,6 +2,7 @@
 #define OPTIONS
 
 #include <string>
+#include <map>
 
 using namespace std;
 
@@ -21,13 +22,9 @@ class Options {
     public:
         static Options& getInstance();
 
-        void setInstanceFilename(string file);
-        void setLogFilename(string file);
-        void setResultsFilename(string file);
-        void setMinCommonPart(int minCommonPart);
+        void load(int argc, char *argv[]);
+
         void setBasePairsPerOligonucleotide(int bpPerOligo);
-        void setSolutionsNumber(int solutionsNumber);
-        void setTimeout(int timeout);
 
         string getInstanceFilename();
         string getLogFilename();

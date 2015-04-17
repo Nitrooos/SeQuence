@@ -1,6 +1,11 @@
 #ifndef COMMAND_LINE_PARSER
 #define COMMAND_LINE_PARSER
 
+#include <map>
+#include <string>
+
+using namespace std;
+
 class Parser {
     Parser()                 = delete;
     Parser(Parser const&)    = delete;
@@ -9,7 +14,7 @@ class Parser {
     static void showHelpInfo(char *programName);
 
     public:
-        static void setProgramOptions(int argc, char *argv[]);
+        static map<string, string> setProgramOptions(int argc, char *argv[]);
 };
 
 #endif

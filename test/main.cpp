@@ -12,7 +12,7 @@
 #include "ConverterTest.hpp"
 #include "InstanceLoaderTest.hpp"
 #include "HelpersTest.hpp"
-#include "CommandLineParserTest.hpp"
+#include "OptionsTest.hpp"
 
 int main () {
     // informs test-listener about testresults
