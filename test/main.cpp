@@ -13,6 +13,7 @@
 #include "InstanceLoaderTest.hpp"
 #include "HelpersTest.hpp"
 #include "OptionsTest.hpp"
+#include "InstanceTest.hpp"
 
 int main () {
     // informs test-listener about testresults
