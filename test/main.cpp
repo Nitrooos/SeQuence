@@ -14,6 +14,7 @@
 #include "HelpersTest.hpp"
 #include "OptionsTest.hpp"
 #include "InstanceTest.hpp"
+#include "VertexTest.hpp"
 
 int main () {
     // informs test-listener about testresults

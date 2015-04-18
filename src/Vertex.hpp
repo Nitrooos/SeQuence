@@ -11,17 +11,18 @@ class Vertex {
             return lhs.second > rhs.second;
         }
     };
+    typedef multiset<pair<Vertex*, int>, SuccessorsCompare> SetOfSuccessors;
 
     Vertex() = delete;
 
     int oligonucleotide;
-    multiset<pair<Vertex*, int>, SuccessorsCompare> successors;
+    SetOfSuccessors successors;
 
     public:
         Vertex(int oligo);
         void addSuccessor(Vertex *v, int commonPart);
         int getValue() const;
-        void printSuccessors() const;
+        SetOfSuccessors const& getSuccessors() const { return successors; }
 };
 
 #endif

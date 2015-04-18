@@ -1,7 +1,6 @@
 #include "../src/InstanceLoader.hpp"
 #include "../src/Vertex.hpp"
 
-#include <iostream>
 #include <vector>
 #include <string>
 
