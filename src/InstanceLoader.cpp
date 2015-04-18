@@ -9,7 +9,7 @@
 
 InstanceLoader::InstanceLoader() {}
 
-void InstanceLoader::run(string file, vector<Vertex> &vertexes) const {
+void InstanceLoader::run(string file, list<Vertex> &vertexes) const {
     ifstream F(file);
     if (F.fail())
         throw CannotOpenInstanceFileError(file);
@@ -31,7 +31,7 @@ void InstanceLoader::run(string file, vector<Vertex> &vertexes) const {
     this->addSuccessorsToVertexes(vertexes);
 }
 
-void InstanceLoader::addSuccessorsToVertexes(vector<Vertex> &vertexes) const {
+void InstanceLoader::addSuccessorsToVertexes(list<Vertex> &vertexes) const {
     for (auto &vertex : vertexes)
         for (auto &cand : vertexes) {
             int common = CommonPart::get(vertex, cand);
