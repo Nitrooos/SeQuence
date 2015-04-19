@@ -13,5 +13,6 @@ void Graph::setSequencingAlgorithm(SequencingAlgorithm *sa) {
 }
 
 void Graph::runAlgorithm() const {
-    seqAlgorithm.get()->run(*this);
+    if (seqAlgorithm.get() != nullptr)
+        seqAlgorithm.get()->run(*this);
 }

@@ -20,7 +20,7 @@ struct NoEnoughSpaceInInt : public exception {
 struct CannotOpenInstanceFileError : public exception {
     CannotOpenInstanceFileError(string filename) : filename(filename) { }
     const char *what() const throw() {
-        return string("Cannot open instance file: " + filename + ":\nIt's a valid path?").c_str();
+        return string("Cannot open instance file: " + filename + ":\nIs it a valid path?").c_str();
     }
 
     protected:

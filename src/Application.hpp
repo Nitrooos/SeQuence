@@ -5,12 +5,10 @@
 
 #include "Graph.hpp"
 #include "Instance.hpp"
-#include "Logger.hpp"
 
 class Application {
     unique_ptr<Graph> graph;
     unique_ptr<Instance> instance;
-    Logger logger;
 
     int argc;
     char **argv;
