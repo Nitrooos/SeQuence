@@ -6,10 +6,9 @@
 #include <memory>
 
 #include "Vertex.hpp"
+#include "SequencingAlgorithm.hpp"
 
 using namespace std;
-
-class SequencingAlgorithm;
 
 class Graph {
     Graph() = delete;
