@@ -2,7 +2,6 @@
 #include "Options.hpp"
 
 #include <sstream>
-#include <iostream>
 
 Instance::Instance(string file) : name(file), positiveErrors(0), negativeErrors(0), n(0) {
     int idealSpectrum, errors;

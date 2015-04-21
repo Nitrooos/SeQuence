@@ -1,7 +1,5 @@
 #include "Vertex.hpp"
 
-#include <iostream>
-
 Vertex::Vertex(int oligo) : oligonucleotide(oligo) {}
 
 void Vertex::addSuccessor(Vertex *v, int commonPart) {
