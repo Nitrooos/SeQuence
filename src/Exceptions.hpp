@@ -27,4 +27,11 @@ struct CannotOpenInstanceFileError : public exception {
         string filename;
 };
 
+struct OnlyHelpInfo : public exception {
+    OnlyHelpInfo() { }
+    const char *what() const throw() {
+        return "";
+    }
+};
+
 #endif  /* EXCEPTIONS_HPP */

@@ -8,6 +8,9 @@
 using namespace std;
 
 class Logger {
+    void writeBasicInfoOnBegin();
+    bool fileExists(string filename) const;
+    
     ofstream logFile, resultsFile;
 
     public:

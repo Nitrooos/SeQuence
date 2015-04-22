@@ -1,4 +1,5 @@
 #include "CommandLineParser.hpp"
+#include "Exceptions.hpp"
 
 #include <unistd.h>
 #include <iostream>
@@ -34,4 +35,6 @@ void Parser::showHelpInfo(char *programName) {
          << "\t" << "-l   log file (default: log)\n"
          << "\t" << "-r   results file (default: results)\n\n"
          << "Example: " << programName << " -f data/instances/9.200-40 -s 10 -m 8 -t 100 -l mylog.txt\n";
+    
+    throw OnlyHelpInfo();
 }

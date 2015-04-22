@@ -30,6 +30,8 @@ int main(int argc, char *argv[]) {
         cerr << e.what() << "\n";
     } catch (CannotOpenInstanceFileError const& e) {
         cerr << e.what() << "\n";
+    } catch(OnlyHelpInfo const& e) {
+        
     } catch (...) {
         cerr << "Exception of unknown type!\n";                   // Kernel Panic
     }
