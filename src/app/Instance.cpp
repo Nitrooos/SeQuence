@@ -4,7 +4,7 @@
 #include <sstream>
 
 Instance::Instance(string file) : name(file), positiveErrors(0), negativeErrors(0), n(0) {
-    int idealSpectrum, errors;
+    int idealSpectrum;
 
     vector<string> tokens = split(name, '/');
     tokens = split(tokens.back(), '.');

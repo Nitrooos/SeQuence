@@ -1,5 +1,5 @@
-#include "../src/Vertex.hpp"
-#include "../src/Converter.hpp"
+#include "../src/graph/Vertex.hpp"
+#include "../src/helper/Converter.hpp"
 
 #include <time.h>
 

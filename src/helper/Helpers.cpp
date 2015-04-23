@@ -1,6 +1,6 @@
 #include "Helpers.hpp"
-#include "Vertex.hpp"
-#include "Options.hpp"
+#include "../graph/Vertex.hpp"
+#include "../app/Options.hpp"
 
 int CommonPart::get(Vertex const& vertex, Vertex const& candidate) {
     Options &o = Options::getInstance();

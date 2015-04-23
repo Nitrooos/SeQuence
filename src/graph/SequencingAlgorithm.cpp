@@ -1,7 +1,7 @@
 #include "SequencingAlgorithm.hpp"
 #include "Graph.hpp"
-#include "Logger.hpp"
-#include "Options.hpp"
+#include "../helper/Logger.hpp"
+#include "../app/Options.hpp"
 
 #include <iostream>
 

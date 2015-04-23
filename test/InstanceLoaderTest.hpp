@@ -1,5 +1,5 @@
-#include "../src/InstanceLoader.hpp"
-#include "../src/Vertex.hpp"
+#include "../src/graph/InstanceLoader.hpp"
+#include "../src/graph/Vertex.hpp"
 
 #include <list>
 #include <string>

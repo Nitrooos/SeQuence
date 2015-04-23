@@ -1,4 +1,4 @@
-#include "../src/Options.hpp"
+#include "../src/app/Options.hpp"
 
 class OptionsTest : public CppUnit::TestCase {
     CPPUNIT_TEST_SUITE(OptionsTest);

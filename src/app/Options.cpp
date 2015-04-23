@@ -1,10 +1,10 @@
 #include "Options.hpp"
 #include "CommandLineParser.hpp"
-#include "Exceptions.hpp"
+#include "../Exceptions.hpp"
 
 Options::Options()
     : minCommonPart(7), basePairsPerOligonucleotide(10), solutionsNumber(1), timeout(-1),
-      logFilename("log"), resultsFilename("results") {}
+      logFilename("output/log"), resultsFilename("output/results"), debugMode(false) {}
 
 Options& Options::getInstance() {
     static Options instance;
@@ -27,6 +27,9 @@ void Options::load(int argc, char *argv[]) {
         this->minCommonPart = stoul(options["m"]);
     if (options.find("t") != options.end())
         this->timeout = stoul(options["t"]);
+    
+    if (options.find("d") != options.end())
+        this->debugMode = true;
 }
 
 void Options::setBasePairsPerOligonucleotide(int bpPerOligo) {
@@ -59,4 +62,8 @@ int Options::getSolutionsNumber() {
 
 int Options::getTimeout() {
     return timeout;
+}
+
+bool Options::getDebugMode() {
+    return debugMode;
 }

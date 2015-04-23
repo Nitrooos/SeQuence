@@ -24,4 +24,12 @@ class InstanceLoadedEvent : public Event {
         string getMessage() const { return "Instance " + name + " loaded"; }
 };
 
+class StatisticsGeneratedEvent : public Event {
+    int arches;
+    
+    public:
+        StatisticsGeneratedEvent(int successors) : arches(successors) {}
+        string getMessage() const { return "    Graph include " + to_string(arches) + " arches"; }
+};
+
 #endif
