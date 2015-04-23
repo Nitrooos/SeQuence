@@ -1,17 +1,19 @@
 #ifndef APPLICATION
 #define APPLICATION
 
-#include <memory>
+#include <list>
 
-#include "Graph.hpp"
-#include "Instance.hpp"
+#include "task/Task.hpp"
+#include "task/Data.hpp"
 
 class Application {
-    unique_ptr<Graph> graph;
-    unique_ptr<Instance> instance;
-
+    void loadTasks();
+    
     int argc;
     char **argv;
+
+    list<Task*> tasks;
+    Data data;
 
     public:
         Application(int argc, char *argv[]);

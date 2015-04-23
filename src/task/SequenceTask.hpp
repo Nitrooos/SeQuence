@@ -2,6 +2,7 @@
 #define SEQUENCE_TASK
 
 #include "Task.hpp"
+#include "Data.hpp"
 
 class SequenceTask : public Task {
     public:

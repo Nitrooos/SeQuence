@@ -18,6 +18,7 @@ class Options {
         basePairsPerOligonucleotide,
         solutionsNumber,
         timeout;
+    bool debugMode;
 
     public:
         static Options& getInstance();
@@ -33,6 +34,7 @@ class Options {
         int getBasePairsPerOligonucleotide();
         int getSolutionsNumber();
         int getTimeout();
+        bool getDebugMode();
         constexpr static int getBytesPerInt() { return sizeof(int); }
 };
 

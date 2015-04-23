@@ -1,7 +1,8 @@
 #include "Application.hpp"
 #include "Options.hpp"
 #include "Exceptions.hpp"
-#include "SequencingAlgorithm.hpp"
+#include "task/SequenceTask.hpp"
+#include "task/GrabStatistics.hpp"
 
 #include <string>
 #include <iostream>
@@ -10,15 +11,25 @@ using namespace std;
 
 Application::Application(int argc, char *argv[]) : argc(argc), argv(argv) {
     Options::getInstance().load(argc, argv);
-    string instanceFilename = Options::getInstance().getInstanceFilename();
 
-    graph.reset(new Graph(instanceFilename));
-    instance.reset(new Instance(instanceFilename));
+    string instanceFilename = Options::getInstance().getInstanceFilename();
+    data.graph.reset(new Graph(instanceFilename));
+    data.instance.reset(new Instance(instanceFilename));
+    
+    this->loadTasks();
+}
+
+void Application::loadTasks() {
+    if (Options::getInstance().getDebugMode())
+        tasks.push_back(new GrabStatistics(&data));
+    else
+        tasks.push_back(new SequenceTask(&data));
 }
 
 int Application::run() {
-    graph.get()->setSequencingAlgorithm(new SimpleHeuristic());
-    graph.get()->runAlgorithm();
+    for (auto &task : tasks)
+        task->run();
+    
     return 0;
 }
 

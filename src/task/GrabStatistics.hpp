@@ -2,6 +2,7 @@
 #define GRAB_STATISTICS
 
 #include "Task.hpp"
+#include "Data.hpp"
 
 class GrabStatistics : public Task {
     public:

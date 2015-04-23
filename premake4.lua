@@ -4,7 +4,7 @@ solution "Genome Sequencing"
         configurations { "debug", "release" }
             language "C++"
             kind "ConsoleApp"
-            files "src/*.cpp"
+            files "src/**.cpp"
             buildoptions { "-w -Wall -std=c++11" }
             linkoptions { "" }
             objdir "obj/src"
@@ -28,7 +28,7 @@ solution "Genome Sequencing"
             language "C++"
             kind "ConsoleApp"
             files "test/*.cpp"
-            files "src/*.cpp"
+            files "src/**.cpp"
             excludes "src/Application.cpp"
             buildoptions { "-w -Wall -std=c++11" }
             linkoptions { "-lcppunit" }

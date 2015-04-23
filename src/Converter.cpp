@@ -29,6 +29,7 @@ char Converter::getNthNucleotide(int oligo, int n) const {
         case 1: return 'C';
         case 2: return 'T';
         case 3: return 'G';
+        default: return 'A';
     }
 }
 
@@ -38,5 +39,6 @@ char Converter::getNthNucleotide(char nucleotide) const {
         case 'C': return 1;
         case 'T': return 2;
         case 'G': return 3;
+        default: return 0;
     }
 }
