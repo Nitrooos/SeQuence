@@ -15,17 +15,14 @@ class LoggerTest : public CppUnit::TestCase {
             Logger l;
             l.log(InstanceLoadedEvent("data/instances/9.200-40"));
             l.log(InstanceLoadedEvent("data/instances/53.500+200"));
-            l.saveResult(ResultEvent());
 
-            ifstream L("log"), R("results");
+            ifstream L("output/log");
             string temp;
 
             getline(L, temp);
             CPPUNIT_ASSERT(temp == "Instance data/instances/9.200-40 loaded");
             getline(L, temp);
             CPPUNIT_ASSERT(temp == "Instance data/instances/53.500+200 loaded");
-            getline(R, temp);
-            CPPUNIT_ASSERT(temp == "JAKIŚ REZULTAT");
         }
 };
 

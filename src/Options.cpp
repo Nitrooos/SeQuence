@@ -4,7 +4,7 @@
 
 Options::Options()
     : minCommonPart(7), basePairsPerOligonucleotide(10), solutionsNumber(1), timeout(-1),
-      logFilename("log"), resultsFilename("results"), debugMode(false) {}
+      logFilename("output/log"), resultsFilename("output/results"), debugMode(false) {}
 
 Options& Options::getInstance() {
     static Options instance;
