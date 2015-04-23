@@ -8,10 +8,19 @@ GrabStatistics::GrabStatistics(Data *data) : Task(data) { }
 void GrabStatistics::run() const {
     Graph *graph = data->graph.get();
     
-    Logger l;
-    int successors = 0;
+    Statistic s;
+    s.vertexes = graph->getVertexes().size();
+    
     for (auto &v : graph->getVertexes()) {
-        successors += v.getSuccessors().size();
+        s.arches += v.getSuccessors().size();
+        for (auto &succ : v.getSuccessors()) {
+            ++s.successorsByType[succ.second];
+        }
     }
-    l.log(StatisticsGeneratedEvent(successors));
+    
+    s.avgSuccessors = s.arches/(double)s.vertexes;
+    s.density = s.vertexes/(s.vertexes*(s.vertexes - 1)/2.0);
+    
+    Logger l;
+    l.log(StatisticsGeneratedEvent(s));
 }

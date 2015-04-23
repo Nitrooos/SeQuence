@@ -1,6 +1,8 @@
 #ifndef EVENT
 #define EVENT
 
+#include "../task/Statistic.hpp"
+
 #include <string>
 
 using namespace std;
@@ -25,11 +27,11 @@ class InstanceLoadedEvent : public Event {
 };
 
 class StatisticsGeneratedEvent : public Event {
-    int arches;
+    Statistic statistic;
     
     public:
-        StatisticsGeneratedEvent(int successors) : arches(successors) {}
-        string getMessage() const { return "    Graph include " + to_string(arches) + " arches"; }
+        StatisticsGeneratedEvent(Statistic const& stat) : statistic(stat) {}
+        string getMessage() const;
 };
 
 #endif
