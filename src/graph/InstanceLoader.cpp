@@ -1,9 +1,9 @@
 #include "InstanceLoader.hpp"
-#include "Converter.hpp"
+#include "../helper/Converter.hpp"
 #include "Vertex.hpp"
-#include "Options.hpp"
-#include "Helpers.hpp"
-#include "Exceptions.hpp"
+#include "../app/Options.hpp"
+#include "../helper/Helpers.hpp"
+#include "../Exceptions.hpp"
 
 #include <fstream>
 

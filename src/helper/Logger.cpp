@@ -1,6 +1,6 @@
 #include "Logger.hpp"
 #include "Event.hpp"
-#include "Options.hpp"
+#include "../app/Options.hpp"
 
 Logger::Logger() {
     logFile.open(Options::getInstance().getLogFilename(), ios_base::app);

@@ -1,5 +1,5 @@
 #include "CommandLineParser.hpp"
-#include "Exceptions.hpp"
+#include "../Exceptions.hpp"
 
 #include <unistd.h>
 #include <iostream>

@@ -29,7 +29,7 @@ solution "Genome Sequencing"
             kind "ConsoleApp"
             files "test/*.cpp"
             files "src/**.cpp"
-            excludes "src/Application.cpp"
+            excludes "src/app/Application.cpp"
             buildoptions { "-w -Wall -std=c++11" }
             linkoptions { "-lcppunit" }
             objdir "obj/test"

@@ -1,5 +1,5 @@
-#include "../src/Converter.hpp"
-#include "../src/Options.hpp"
+#include "../src/helper/Converter.hpp"
+#include "../src/app/Options.hpp"
 
 #include <time.h>
 #include <stdlib.h>

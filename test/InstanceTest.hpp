@@ -1,4 +1,4 @@
-#include "../src/Instance.hpp"
+#include "../src/app/Instance.hpp"
 
 class InstanceTest : public CppUnit::TestCase {
     CPPUNIT_TEST_SUITE(InstanceTest);

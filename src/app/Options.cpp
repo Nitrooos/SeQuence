@@ -1,6 +1,6 @@
 #include "Options.hpp"
 #include "CommandLineParser.hpp"
-#include "Exceptions.hpp"
+#include "../Exceptions.hpp"
 
 Options::Options()
     : minCommonPart(7), basePairsPerOligonucleotide(10), solutionsNumber(1), timeout(-1),

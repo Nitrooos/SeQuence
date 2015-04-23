@@ -1,8 +1,8 @@
 #ifndef DATA
 #define DATA
 
-#include "../Graph.hpp"
-#include "../Instance.hpp"
+#include "../graph/Graph.hpp"
+#include "../app/Instance.hpp"
 
 #include <memory>
 

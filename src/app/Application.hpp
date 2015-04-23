@@ -3,8 +3,8 @@
 
 #include <list>
 
-#include "task/Task.hpp"
-#include "task/Data.hpp"
+#include "../task/Task.hpp"
+#include "../task/Data.hpp"
 
 class Application {
     void loadTasks();

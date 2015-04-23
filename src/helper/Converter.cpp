@@ -1,6 +1,6 @@
 #include "Converter.hpp"
-#include "Options.hpp"
-#include "Exceptions.hpp"
+#include "../app/Options.hpp"
+#include "../Exceptions.hpp"
 
 Converter::Converter() { }
 

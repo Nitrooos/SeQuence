@@ -1,8 +1,8 @@
 #include "Application.hpp"
 #include "Options.hpp"
-#include "Exceptions.hpp"
-#include "task/SequenceTask.hpp"
-#include "task/GrabStatistics.hpp"
+#include "../Exceptions.hpp"
+#include "../task/SequenceTask.hpp"
+#include "../task/GrabStatistics.hpp"
 
 #include <string>
 #include <iostream>

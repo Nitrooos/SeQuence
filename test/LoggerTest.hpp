@@ -1,5 +1,5 @@
-#include "../src/Logger.hpp"
-#include "../src/Event.hpp"
+#include "../src/helper/Logger.hpp"
+#include "../src/helper/Event.hpp"
 
 #include <fstream>
 

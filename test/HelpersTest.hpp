@@ -1,4 +1,4 @@
-#include "../src/Helpers.hpp"
+#include "../src/helper/Helpers.hpp"
 
 class HelpersTest : public CppUnit::TestCase {
     CPPUNIT_TEST_SUITE(HelpersTest);
