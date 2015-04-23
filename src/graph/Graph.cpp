@@ -16,3 +16,7 @@ void Graph::runAlgorithm() const {
     if (seqAlgorithm.get() != nullptr)
         seqAlgorithm.get()->run(*this);
 }
+
+list<Vertex> const& Graph::getVertexes() const {
+    return vertexes;
+}

@@ -3,6 +3,7 @@
 #include "../Exceptions.hpp"
 #include "../task/SequenceTask.hpp"
 #include "../task/GrabStatistics.hpp"
+#include "../helper/Logger.hpp"
 
 #include <string>
 #include <iostream>
@@ -15,6 +16,9 @@ Application::Application(int argc, char *argv[]) : argc(argc), argv(argv) {
     string instanceFilename = Options::getInstance().getInstanceFilename();
     data.graph.reset(new Graph(instanceFilename));
     data.instance.reset(new Instance(instanceFilename));
+    
+    Logger l;
+    l.log(InstanceLoadedEvent(data.instance.get()->getName()));
     
     this->loadTasks();
 }
