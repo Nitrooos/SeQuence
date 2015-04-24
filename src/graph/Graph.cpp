@@ -1,6 +1,5 @@
 #include "Graph.hpp"
 #include "Vertex.hpp"
-#include "SequencingAlgorithm.hpp"
 #include "InstanceLoader.hpp"
 
 Graph::Graph(string instanceFile) {
@@ -8,13 +7,13 @@ Graph::Graph(string instanceFile) {
     loader.run(instanceFile, this->vertexes);
 }
 
-void Graph::setSequencingAlgorithm(SequencingAlgorithm *sa) {
-    seqAlgorithm.reset(sa);
+void Graph::setGraphAlgorithm(GraphAlgorithm *alg) {
+    algorithm.reset(alg);
 }
 
 void Graph::runAlgorithm() const {
-    if (seqAlgorithm.get() != nullptr)
-        seqAlgorithm.get()->run(*this);
+    if (algorithm.get() != nullptr)
+        algorithm.get()->run(*this);
 }
 
 list<Vertex> const& Graph::getVertexes() const {

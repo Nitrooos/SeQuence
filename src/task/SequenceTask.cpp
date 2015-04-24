@@ -1,8 +1,11 @@
 #include "SequenceTask.hpp"
 
-SequenceTask::SequenceTask(Data *data) : Task(data) { }
+#include <iostream>
+
+SequenceTask::SequenceTask(Data *data) : Task(data), algorithm(new SimpleHeuristic()) { }
 
 void SequenceTask::run() const {
-    data->graph.get()->setSequencingAlgorithm(new SimpleHeuristic());
+    std::cout << "SequenceTask::run\n";
+    data->graph.get()->setGraphAlgorithm(this->algorithm);
     data->graph.get()->runAlgorithm();
 }
