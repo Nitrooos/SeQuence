@@ -5,8 +5,10 @@
 #include "Task.hpp"
 #include "Data.hpp"
 
+#include <memory>
+
 class SequenceTask : public Task {
-    SequencingAlgorithm *algorithm;
+    unique_ptr<SequencingAlgorithm> algorithm;
     
     public:
         SequenceTask(Data *data);

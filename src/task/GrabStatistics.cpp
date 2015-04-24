@@ -5,7 +5,9 @@
 
 #include <iostream>
 
-GrabStatistics::GrabStatistics(Data *data) : Task(data), algorithm(new DFS()) { }
+GrabStatistics::GrabStatistics(Data *data) : Task(data) {
+    algorithm.reset(new DFS());
+}
 
 void GrabStatistics::run() const {
     std::cout << "GrabStatistics::run\n";
@@ -24,9 +26,9 @@ void GrabStatistics::run() const {
     s.avgSuccessors = s.arches/(double)s.vertexes;
     s.density = s.vertexes/(s.vertexes*(s.vertexes - 1)/2.0);
     
-    graph->setGraphAlgorithm(this->algorithm);
+    graph->setGraphAlgorithm(algorithm.get());
     graph->runAlgorithm();
-    this->algorithm->fillStatistic(s);
+    algorithm.get()->fillStatistic(s);
     
     Logger l;
     l.log(StatisticsGeneratedEvent(s));

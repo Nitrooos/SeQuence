@@ -5,8 +5,10 @@
 #include "Task.hpp"
 #include "Data.hpp"
 
+#include <memory>
+
 class GrabStatistics : public Task {
-    StatisticAlgorithm *algorithm;
+    unique_ptr<StatisticAlgorithm> algorithm;
     
     public:
         GrabStatistics(Data *data);
