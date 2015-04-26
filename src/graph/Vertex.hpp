@@ -24,20 +24,4 @@ class Vertex {
         SetOfSuccessors const& getSuccessors() const { return successors; }
 };
 
-    class VertexDecorator : public Vertex {
-        protected:
-            Vertex &decoratedVertex;
-        public:
-            VertexDecorator(Vertex &v);
-    };
-
-        class VisitedVertex : public VertexDecorator {
-            private:
-                bool visited;
-            public:
-                VisitedVertex(Vertex &v);
-                void visit();
-                bool getVisited() const;
-        };
-
 #endif

@@ -11,15 +11,3 @@ void Vertex::addSuccessor(Vertex *v, int commonPart) {
 int Vertex::getValue() const {
     return oligonucleotide;
 }
-
-VertexDecorator::VertexDecorator(Vertex &v) : decoratedVertex(v) { }
-
-VisitedVertex::VisitedVertex(Vertex &v) : VertexDecorator(v), visited(false) { }
-
-void VisitedVertex::visit() {
-    visited = true;
-}
-
-bool VisitedVertex::getVisited() const {
-    return visited;
-}

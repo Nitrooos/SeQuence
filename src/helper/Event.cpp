@@ -5,7 +5,8 @@ string StatisticsGeneratedEvent::getMessage() const {
     "    Graph include " + to_string(statistic.vertexes) + " vertexes with\n" +
     "                  " + to_string(statistic.arches)   + " arches\n"   +
     "                  which means " + to_string(statistic.density) + " density\n" +
-    "                  and " + to_string(statistic.avgSuccessors) + " average successors per vertex\n";
+    "                  and " + to_string(statistic.avgSuccessors) + " average successors per vertex\n" +
+    "    Isolated vertexes: " + to_string(statistic.isolatedVertexes) + "\n";
     
     for (auto it = statistic.successorsByType.rbegin();
               it != statistic.successorsByType.rend();
