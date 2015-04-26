@@ -1,7 +1,6 @@
 #include "GraphAlgorithm.hpp"
 #include "Graph.hpp"
 #include "../helper/Logger.hpp"
-#include "../helper/Converter.hpp"
 #include "../app/Options.hpp"
 
 #include <stack>
@@ -62,19 +61,16 @@ void DetermineBeginningVertex::run(Graph const& g) {
     for (auto &v : g.getVertexes())
         penaltyPoints.insert(make_pair(&v, 0));
     
-    for (auto &v : g.getVertexes()) {
+    for (auto &v : g.getVertexes())
         for (auto &succ : v.getSuccessors()) {
             penaltyPoints[succ.first] += succ.second;
+            penaltyPoints[&v] -= succ.second/2;
         }
-    }
     
     bestBeginningVertex = min_element(penaltyPoints.begin(), penaltyPoints.end(),
         [] (pair<const Vertex*, int> const& i, pair<const Vertex*, int> const& j) {
             return i.second < j.second;
         })->first;
-
-    Converter c;
-    cout << "\tBeginning vertex: " << c.convert(bestBeginningVertex->getValue()) << "\n";
 }
 
 void DetermineBeginningVertex::fillStatistic(Statistic & s) const {
