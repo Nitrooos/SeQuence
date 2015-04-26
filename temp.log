@@ -1,0 +1,4 @@
+	Beginning vertex: ACAATCTTAC
+GrabStatistics::run
+	DFS::run
+	DFS::fillStatistic

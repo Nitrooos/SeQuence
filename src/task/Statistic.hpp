@@ -12,7 +12,7 @@ struct Statistic {
     int vertexes, arches, isolatedVertexes;
     double density, avgSuccessors;
     map<int, int> successorsByType;
-    list<Vertex*> potentialBeginVertexes;
+    const Vertex *potentialBeginVertex;
 };
 
 #endif

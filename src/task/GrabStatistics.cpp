@@ -6,7 +6,11 @@
 #include <iostream>
 
 GrabStatistics::GrabStatistics(Data *data) : Task(data) {
-    algorithm.reset(new DFS());
+    DetermineBeginningVertex *alg = new DetermineBeginningVertex();
+    data->graph.get()->setGraphAlgorithm(alg);
+    data->graph.get()->runAlgorithm();
+    
+    algorithm.reset(new DFS(alg->getBeginningVertex()));
 }
 
 void GrabStatistics::run() const {
@@ -15,7 +19,8 @@ void GrabStatistics::run() const {
     
     Statistic s;
     s.vertexes = graph->getVertexes().size();
-    
+
+    s.arches = 0;
     for (auto &v : graph->getVertexes()) {
         s.arches += v.getSuccessors().size();
         for (auto &succ : v.getSuccessors()) {
@@ -24,12 +29,12 @@ void GrabStatistics::run() const {
     }
     
     s.avgSuccessors = s.arches/(double)s.vertexes;
-    s.density = s.vertexes/(s.vertexes*(s.vertexes - 1)/2.0);
+    s.density = s.arches/(s.vertexes*(s.vertexes - 1)/2.0);
     
     graph->setGraphAlgorithm(algorithm.get());
     graph->runAlgorithm();
     algorithm.get()->fillStatistic(s);
-    
+
     Logger l;
     l.log(StatisticsGeneratedEvent(s));
 }

@@ -22,6 +22,7 @@ class Graph {
         list<Vertex> const& getVertexes() const;
         void setGraphAlgorithm(GraphAlgorithm *alg);
         void runAlgorithm() const;
+        void printGraph() const;
 };
 
 #endif

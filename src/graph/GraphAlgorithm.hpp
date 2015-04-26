@@ -26,11 +26,22 @@ class DFS : public StatisticAlgorithm {
     Vertex *getNonVisitedSuccessor(const Vertex *current);
     
     map<const Vertex*, VertexInfo> vertexesInfo;
+    const Vertex *beginningVertex;
     
     public:
-        DFS();
+        DFS(const Vertex *beginningVertex);
         void run(Graph const& g);
         void fillStatistic(Statistic & s) const;
+};
+
+class DetermineBeginningVertex : public StatisticAlgorithm {
+    const Vertex *bestBeginningVertex;
+    
+    public:
+        DetermineBeginningVertex();
+        void run(Graph const& g);
+        void fillStatistic(Statistic & s) const;
+        const Vertex *getBeginningVertex() const;
 };
 
 class SimpleHeuristic : public SequencingAlgorithm {

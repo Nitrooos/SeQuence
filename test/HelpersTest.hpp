@@ -9,9 +9,9 @@ class HelpersTest : public CppUnit::TestCase {
         void get() {
             Converter c;
 
-            vector<string>  sequences({"AAGGCCGGCT", "AGGCCGGCTA", "GCCGGCTACT", "GGCTACTGCG",
+            vector<string>  sequences({"ACCATGGATG", "CCATGGATGA", "AAGGCCGGCT", "AGGCCGGCTA", "GCCGGCTACT", "GGCTACTGCG",
                 "TACTGCGTTC", "ACTGCGTTCG"});
-            vector<int>     goodResults({9, 8, 7, 7, 9});
+            vector<int>     goodResults({9, 0, 9, 8, 7, 7, 9});
             vector<Vertex*> vertexes(sequences.size());
 
             for (int i = 0; i < vertexes.size(); ++i)

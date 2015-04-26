@@ -34,6 +34,9 @@ void InstanceLoader::run(string file, list<Vertex> &vertexes) const {
 void InstanceLoader::addSuccessorsToVertexes(list<Vertex> &vertexes) const {
     for (auto &vertex : vertexes)
         for (auto &cand : vertexes) {
+            if (&vertex == &cand)
+                continue;
+            
             int common = CommonPart::get(vertex, cand);
             if (common >= Options::getInstance().getMinCommonPart())
                 vertex.addSuccessor(&cand, common);
