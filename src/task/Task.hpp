@@ -9,7 +9,7 @@ class Task {
 
     public:
         Task(Data *data);
-        virtual void run() const = 0;
+        virtual void run() = 0;
 };
 
 #endif /* TASK_H */

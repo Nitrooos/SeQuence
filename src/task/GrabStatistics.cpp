@@ -9,32 +9,32 @@ GrabStatistics::GrabStatistics(Data *data) : Task(data) {
     DetermineBeginningVertex *alg = new DetermineBeginningVertex();
     data->graph.get()->setGraphAlgorithm(alg);
     data->graph.get()->runAlgorithm();
+    alg->fillStatistic(statistic);
     
     algorithm.reset(new DFS(alg->getBeginningVertex()));
 }
 
-void GrabStatistics::run() const {
+void GrabStatistics::run() {
     std::cout << "GrabStatistics::run\n";
     Graph *graph = data->graph.get();
     
-    Statistic s;
-    s.vertexes = graph->getVertexes().size();
+    statistic.vertexes = graph->getVertexes().size();
 
-    s.arches = 0;
+    statistic.arches = 0;
     for (auto &v : graph->getVertexes()) {
-        s.arches += v.getSuccessors().size();
+        statistic.arches += v.getSuccessors().size();
         for (auto &succ : v.getSuccessors()) {
-            ++s.successorsByType[succ.second];
+            ++statistic.successorsByType[succ.second];
         }
     }
     
-    s.avgSuccessors = s.arches/(double)s.vertexes;
-    s.density = s.arches/(s.vertexes*(s.vertexes - 1)/2.0);
+    statistic.avgSuccessors = statistic.arches/(double)statistic.vertexes;
+    statistic.density = statistic.arches/(statistic.vertexes*(statistic.vertexes - 1)/2.0);
     
     graph->setGraphAlgorithm(algorithm.get());
     graph->runAlgorithm();
-    algorithm.get()->fillStatistic(s);
+    algorithm.get()->fillStatistic(statistic);
 
     Logger l;
-    l.log(StatisticsGeneratedEvent(s));
+    l.log(StatisticsGeneratedEvent(statistic));
 }

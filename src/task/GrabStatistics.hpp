@@ -9,10 +9,11 @@
 
 class GrabStatistics : public Task {
     unique_ptr<StatisticAlgorithm> algorithm;
+    Statistic statistic;
     
     public:
         GrabStatistics(Data *data);
-        void run() const;
+        void run();
 };
 
 #endif

@@ -12,7 +12,7 @@ class SequenceTask : public Task {
     
     public:
         SequenceTask(Data *data);
-        void run() const;
+        void run();
 };
 
 #endif

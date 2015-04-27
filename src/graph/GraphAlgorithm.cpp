@@ -46,11 +46,11 @@ void DFS::run(Graph const& g) {
 void DFS::fillStatistic(Statistic & s) const {
     cout << "\tDFS::fillStatistic\n";
     
-    int isolated = count_if(vertexesInfo.begin(), vertexesInfo.end(), [] (pair<const Vertex*, VertexInfo> const& p) {
-        return !p.second.visited;
+    int visited = count_if(vertexesInfo.begin(), vertexesInfo.end(), [] (pair<const Vertex*, VertexInfo> const& p) {
+        return p.second.visited;
     });
     
-    s.isolatedVertexes = isolated;
+    s.visitedVertexes = visited;
 }
 
         // DetermineBeginningVertex
@@ -74,7 +74,7 @@ void DetermineBeginningVertex::run(Graph const& g) {
 }
 
 void DetermineBeginningVertex::fillStatistic(Statistic & s) const {
-    s.potentialBeginVertex = bestBeginningVertex;
+    s.potentialBeginningVertexes.push_back(bestBeginningVertex);
 }
 
 const Vertex *DetermineBeginningVertex::getBeginningVertex() const {

@@ -9,10 +9,10 @@
 using namespace std;
 
 struct Statistic {
-    int vertexes, arches, isolatedVertexes;
+    int vertexes, arches, visitedVertexes;
     double density, avgSuccessors;
     map<int, int> successorsByType;
-    const Vertex *potentialBeginVertex;
+    list<const Vertex*> potentialBeginningVertexes;
 };
 
 #endif

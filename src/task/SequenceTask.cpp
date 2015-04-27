@@ -6,7 +6,7 @@ SequenceTask::SequenceTask(Data *data) : Task(data) {
     algorithm.reset(new SimpleHeuristic());
 }
 
-void SequenceTask::run() const {
+void SequenceTask::run() {
     std::cout << "SequenceTask::run\n";
     data->graph.get()->setGraphAlgorithm(algorithm.get());
     data->graph.get()->runAlgorithm();
