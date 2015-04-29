@@ -24,7 +24,6 @@ class DFS : GraphAlgorithm {
     };
     
     Vertex *getNonVisitedSuccessor(const Vertex *current);
-    void logResult() const;
     
     map<const Vertex*, VertexInfo> vertexesInfo;
     const Vertex *beginningVertex;
@@ -32,6 +31,7 @@ class DFS : GraphAlgorithm {
     public:
         DFS(const Vertex *beginningVertex);
         void run(Graph const& g);
+        int getVisitedVertexesNumber() const;
 };
 
 class DetermineBeginningVertexes : public StatisticAlgorithm {

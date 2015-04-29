@@ -13,6 +13,7 @@ struct Statistic {
     double density, avgSuccessors;
     map<int, int> successorsByType;
     list<const Vertex*> potentialBeginningVertexes;
+    pair<const Vertex*, int> chosenBeginningVertex;
 };
 
 #endif

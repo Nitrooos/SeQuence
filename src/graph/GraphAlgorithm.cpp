@@ -6,7 +6,6 @@
 
 #include <stack>
 #include <algorithm>
-#include <iostream>
 
         // DFS
 
@@ -20,8 +19,6 @@ Vertex *DFS::getNonVisitedSuccessor(const Vertex *current) {
 }
 
 void DFS::run(Graph const& g) {    
-    cout << "\tDFS::run\n";
-
     vertexesInfo.clear();
     for (auto &v : g.getVertexes())
         vertexesInfo.insert(make_pair(&v, VertexInfo()));
@@ -44,17 +41,12 @@ void DFS::run(Graph const& g) {
     }
 }
 
-void DFS::logResult() const {
-    cout << "\tDFS::logResult\n";
-    
-    int visited = count_if(vertexesInfo.begin(), vertexesInfo.end(), [] (pair<const Vertex*, VertexInfo> const& p) {
-        return p.second.visited;
-    });
-    
-    Logger l;
-    Converter c;
-    
-    l.log(DFSResultEvent(c.convert(beginningVertex->getValue()), visited));
+int DFS::getVisitedVertexesNumber() const {
+    return count_if(vertexesInfo.begin(), vertexesInfo.end(),
+        [] (pair<const Vertex*, VertexInfo> const& p) {
+            return p.second.visited;
+        }
+    );
 }
 
         // DetermineBeginningVertex
@@ -95,8 +87,5 @@ SimpleHeuristic::SimpleHeuristic() { }
 void SimpleHeuristic::run(Graph const& g) {
     Logger l;
     l.log(InstanceLoadedEvent(Options::getInstance().getInstanceFilename()));
-
-    cout << "\tSimpleHeuristic::run\n";
-    
     l.saveResult(ResultEvent());
 }

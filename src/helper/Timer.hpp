@@ -4,16 +4,18 @@
 #include <time.h>
 
 class Timer {
-	struct timespec start1, koniec1;
-	clock_t start2, koniec2;
-	double time;
+    void countInterval();
+    
+    struct timespec start1, koniec1;
+    clock_t start2, koniec2;
+    double time;
 
-	public:
-		Timer();
+    public:
+        Timer();
 
-		void start();
-		void stop();
-		double getTime();
+        void start();
+        void stop();
+        double getTime();
 };
 
 #endif

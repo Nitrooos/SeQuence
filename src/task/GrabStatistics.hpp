@@ -8,9 +8,10 @@
 #include <memory>
 
 class GrabStatistics : public Task {
+    void fillBasicStatistics();
     int countIsolatedVertexes() const;
+    void chooseBestBeginningVertex();
     
-    unique_ptr<StatisticAlgorithm> algorithm;
     Statistic statistic;
     
     public:

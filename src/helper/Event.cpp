@@ -10,10 +10,13 @@ string StatisticsGeneratedEvent::getMessage() const {
     "    Isolated vertexes: " + to_string(statistic.isolatedVertexes) + "\n";
     
     Converter c;
-    result +="    Best potential beginning vertexes:\n";
+    result += "    Best potential beginning vertexes:\n";
     for (auto &potentialBeginningVertex : statistic.potentialBeginningVertexes) {
         result += "        " + c.convert(potentialBeginningVertex->getValue()) + "\n";
     }
+    
+    result += "    Started from vertex: " + c.convert(statistic.chosenBeginningVertex.first->getValue()) +
+              " and visited " + to_string(statistic.chosenBeginningVertex.second) + " vertexes\n";
     
     for (auto it = statistic.successorsByType.rbegin();
               it != statistic.successorsByType.rend();
@@ -24,14 +27,5 @@ string StatisticsGeneratedEvent::getMessage() const {
                   " (avg " + to_string(it->second/(double)statistic.vertexes) + " per vertex)\n";
     }
     
-    return result;
-}
-
-DFSResultEvent::DFSResultEvent(string beginVertex, int visited)
-    : beginVertex(beginVertex), visited(visited)
-{ }
-
-string DFSResultEvent::getMessage() const {
-    string result = "\n\tStarted with vertex: " + beginVertex + " and visited " + to_string(visited) + " vertexes\n";
     return result;
 }

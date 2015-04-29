@@ -3,7 +3,7 @@
 #include "../Exceptions.hpp"
 
 Options::Options()
-    : minCommonPart(7), basePairsPerOligonucleotide(10), solutionsNumber(1), timeout(-1),
+    : minCommonPart(7), basePairsPerOligonucleotide(10), solutionsNumber(10), timeout(-1),
       logFilename("output/log"), resultsFilename("output/results"), debugMode(false) {}
 
 Options& Options::getInstance() {
