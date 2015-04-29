@@ -4,15 +4,9 @@
 #include "../helper/Event.hpp"
 
 #include <iostream>
+#include <algorithm>
 
-GrabStatistics::GrabStatistics(Data *data) : Task(data) {
-    DetermineBeginningVertex *alg = new DetermineBeginningVertex();
-    data->graph.get()->setGraphAlgorithm(alg);
-    data->graph.get()->runAlgorithm();
-    alg->fillStatistic(statistic);
-    
-    algorithm.reset(new DFS(alg->getBeginningVertex()));
-}
+GrabStatistics::GrabStatistics(Data *data) : Task(data) { }
 
 void GrabStatistics::run() {
     std::cout << "GrabStatistics::run\n";
@@ -30,11 +24,28 @@ void GrabStatistics::run() {
     
     statistic.avgSuccessors = statistic.arches/(double)statistic.vertexes;
     statistic.density = statistic.arches/(statistic.vertexes*(statistic.vertexes - 1)/2.0);
+    statistic.isolatedVertexes = countIsolatedVertexes();
     
-    graph->setGraphAlgorithm(algorithm.get());
-    graph->runAlgorithm();
-    algorithm.get()->fillStatistic(statistic);
-
     Logger l;
     l.log(StatisticsGeneratedEvent(statistic));
+}
+
+int GrabStatistics::countIsolatedVertexes() const {
+    map<const Vertex*, bool> isolated;
+    for (auto &v : data->graph.get()->getVertexes())
+        isolated[&v] = true;
+    
+    for (auto &v : isolated) {
+        if (v.first->getSuccessors().size() > 0)
+            v.second = false;
+        
+        for (auto &succ : v.first->getSuccessors())
+            isolated[succ.first] = false;
+    }
+    
+    int isolatedCount = count_if(isolated.begin(), isolated.end(), [] (pair<const Vertex*, bool> const& p) {
+        return p.second;
+    });
+    
+    return isolatedCount;
 }

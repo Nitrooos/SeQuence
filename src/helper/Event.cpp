@@ -6,15 +6,14 @@ string StatisticsGeneratedEvent::getMessage() const {
     "    Graph include " + to_string(statistic.vertexes) + " vertexes with\n" +
     "                  " + to_string(statistic.arches)   + " arches\n"   +
     "                  which means " + to_string(statistic.density) + " density\n" +
-    "                  and " + to_string(statistic.avgSuccessors) + " average successors per vertex\n";
+    "                  and " + to_string(statistic.avgSuccessors) + " average successors per vertex\n" +
+    "    Isolated vertexes: " + to_string(statistic.isolatedVertexes) + "\n";
     
     Converter c;
     result +="    Best potential beginning vertexes:\n";
     for (auto &potentialBeginningVertex : statistic.potentialBeginningVertexes) {
         result += "        " + c.convert(potentialBeginningVertex->getValue()) + "\n";
     }
-    
-    result += "    Visited vertexes: " + to_string(statistic.visitedVertexes) + "\n";
     
     for (auto it = statistic.successorsByType.rbegin();
               it != statistic.successorsByType.rend();
@@ -25,5 +24,14 @@ string StatisticsGeneratedEvent::getMessage() const {
                   " (avg " + to_string(it->second/(double)statistic.vertexes) + " per vertex)\n";
     }
     
+    return result;
+}
+
+DFSResultEvent::DFSResultEvent(string beginVertex, int visited)
+    : beginVertex(beginVertex), visited(visited)
+{ }
+
+string DFSResultEvent::getMessage() const {
+    string result = "\n\tStarted with vertex: " + beginVertex + " and visited " + to_string(visited) + " vertexes\n";
     return result;
 }

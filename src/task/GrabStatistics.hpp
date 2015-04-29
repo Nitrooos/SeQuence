@@ -8,6 +8,8 @@
 #include <memory>
 
 class GrabStatistics : public Task {
+    int countIsolatedVertexes() const;
+    
     unique_ptr<StatisticAlgorithm> algorithm;
     Statistic statistic;
     

@@ -9,7 +9,7 @@
 using namespace std;
 
 struct Statistic {
-    int vertexes, arches, visitedVertexes;
+    int vertexes, arches, isolatedVertexes;
     double density, avgSuccessors;
     map<int, int> successorsByType;
     list<const Vertex*> potentialBeginningVertexes;

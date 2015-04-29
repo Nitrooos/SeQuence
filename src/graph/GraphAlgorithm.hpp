@@ -18,12 +18,13 @@ class StatisticAlgorithm : public GraphAlgorithm {
         virtual void fillStatistic(Statistic & s) const = 0;
 };
 
-class DFS : public StatisticAlgorithm {
+class DFS : GraphAlgorithm {
     struct VertexInfo {
         bool visited{false};
     };
     
     Vertex *getNonVisitedSuccessor(const Vertex *current);
+    void logResult() const;
     
     map<const Vertex*, VertexInfo> vertexesInfo;
     const Vertex *beginningVertex;
@@ -31,17 +32,16 @@ class DFS : public StatisticAlgorithm {
     public:
         DFS(const Vertex *beginningVertex);
         void run(Graph const& g);
-        void fillStatistic(Statistic & s) const;
 };
 
-class DetermineBeginningVertex : public StatisticAlgorithm {
-    const Vertex *bestBeginningVertex;
+class DetermineBeginningVertexes : public StatisticAlgorithm {
+    list<const Vertex*> potentialBeginningVertexes;
     
     public:
-        DetermineBeginningVertex();
+        DetermineBeginningVertexes();
         void run(Graph const& g);
         void fillStatistic(Statistic & s) const;
-        const Vertex *getBeginningVertex() const;
+        list<const Vertex*> getBeginningVertexes() const;
 };
 
 class SimpleHeuristic : public SequencingAlgorithm {

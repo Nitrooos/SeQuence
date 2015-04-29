@@ -34,4 +34,12 @@ class StatisticsGeneratedEvent : public Event {
         string getMessage() const;
 };
 
+class DFSResultEvent : public Event {
+    string beginVertex;
+    int visited;
+    public:
+        DFSResultEvent(string beginVertex, int visited);
+        string getMessage() const;
+};
+
 #endif

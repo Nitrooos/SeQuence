@@ -1,6 +1,7 @@
 #include "GraphAlgorithm.hpp"
 #include "Graph.hpp"
 #include "../helper/Logger.hpp"
+#include "../helper/Converter.hpp"
 #include "../app/Options.hpp"
 
 #include <stack>
@@ -43,20 +44,23 @@ void DFS::run(Graph const& g) {
     }
 }
 
-void DFS::fillStatistic(Statistic & s) const {
-    cout << "\tDFS::fillStatistic\n";
+void DFS::logResult() const {
+    cout << "\tDFS::logResult\n";
     
     int visited = count_if(vertexesInfo.begin(), vertexesInfo.end(), [] (pair<const Vertex*, VertexInfo> const& p) {
         return p.second.visited;
     });
     
-    s.visitedVertexes = visited;
+    Logger l;
+    Converter c;
+    
+    l.log(DFSResultEvent(c.convert(beginningVertex->getValue()), visited));
 }
 
         // DetermineBeginningVertex
-DetermineBeginningVertex::DetermineBeginningVertex() : bestBeginningVertex(nullptr) {}
+DetermineBeginningVertexes::DetermineBeginningVertexes() {}
 
-void DetermineBeginningVertex::run(Graph const& g) {
+void DetermineBeginningVertexes::run(Graph const& g) {
     map<const Vertex*, int> penaltyPoints;
     for (auto &v : g.getVertexes())
         penaltyPoints.insert(make_pair(&v, 0));
@@ -67,20 +71,23 @@ void DetermineBeginningVertex::run(Graph const& g) {
             penaltyPoints[&v] -= succ.second/2;
         }
     
-    bestBeginningVertex = min_element(penaltyPoints.begin(), penaltyPoints.end(),
-        [] (pair<const Vertex*, int> const& i, pair<const Vertex*, int> const& j) {
-            return i.second < j.second;
-        })->first;
+    vector<pair<const Vertex*, int>> penaltyVector(penaltyPoints.begin(), penaltyPoints.end());
+    sort(penaltyVector.begin(), penaltyVector.end(), [] (pair<const Vertex*, int> l, pair<const Vertex*, int> r) {
+        return l.second < r.second;
+    });
+    
+    for (int i = 0; i < 10; ++i)
+        potentialBeginningVertexes.push_back(penaltyVector[i].first);
 }
 
-void DetermineBeginningVertex::fillStatistic(Statistic & s) const {
-    s.potentialBeginningVertexes.push_back(bestBeginningVertex);
+void DetermineBeginningVertexes::fillStatistic(Statistic & s) const {
+    s.potentialBeginningVertexes = potentialBeginningVertexes;
 }
 
-const Vertex *DetermineBeginningVertex::getBeginningVertex() const {
-    return bestBeginningVertex;
+list<const Vertex*> DetermineBeginningVertexes::getBeginningVertexes() const {
+    return potentialBeginningVertexes;
 }
-        
+
         // SimpleHeuristic
 
 SimpleHeuristic::SimpleHeuristic() { }
