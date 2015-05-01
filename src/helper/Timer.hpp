@@ -1,21 +1,20 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-#include <time.h>
+#include <chrono>
+
+using namespace std::chrono;
 
 class Timer {
-    void countInterval();
+    steady_clock::duration time{0};
+    steady_clock::time_point startPoint, endPoint;
     
-    struct timespec start1, koniec1;
-    clock_t start2, koniec2;
-    double time;
-
     public:
         Timer();
-
+        
         void start();
         void stop();
-        double getTime();
+        long double getTime() const;
 };
 
 #endif

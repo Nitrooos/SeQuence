@@ -1,30 +1,16 @@
 #include "Timer.hpp"
 
-Timer::Timer() : time(0.0) { }
+Timer::Timer() { }
 
 void Timer::start() {
-    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start1);
-    start2 = clock();
+    startPoint = steady_clock::now();
 }
 
 void Timer::stop() {
-    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &koniec1);
-    koniec2 = clock();
-    
-    countInterval();
+    endPoint = steady_clock::now();
+    time += endPoint - startPoint;
 }
 
-void Timer::countInterval() {
-    double interval = ((double)(koniec2 - start2))/CLOCKS_PER_SEC;
-    // włączamy większą dokładność
-    if (interval <= 0.05) {
-        interval = (koniec1.tv_nsec - start1.tv_nsec)/1000000000.0;
-        if (interval < 0)
-            ++interval;
-    }
-    time += interval;
-}
-
-double Timer::getTime() {
-    return time;
+long double Timer::getTime() const {
+    return (long double)(time.count()) * steady_clock::period::num / steady_clock::period::den;
 }
