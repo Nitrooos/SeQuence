@@ -2,6 +2,8 @@
 #define EVENT
 
 #include "../task/Statistic.hpp"
+#include "../task/Result.hpp"
+#include "../app/Instance.hpp"
 
 #include <string>
 
@@ -13,9 +15,11 @@ class Event {
 };
 
 class ResultEvent : public Event {
+    Result result;
+    Instance instance;
     public:
-        ResultEvent() { }
-        string getMessage() const { return "JAKIŚ REZULTAT"; }
+        ResultEvent(Instance const& instance, Result const& result) : instance(instance), result(result) { }
+        string getMessage() const;
 };
 
 class InstanceLoadedEvent : public Event {

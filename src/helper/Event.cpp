@@ -29,3 +29,22 @@ string StatisticsGeneratedEvent::getMessage() const {
     
     return result;
 }
+
+string ResultEvent::getMessage() const {
+    Converter c;
+    string resultLog =
+        instance.getName() + "\n" +
+        c.convert(result.oligonucleotidesUsed.front()->getValue()) + "\n" +
+        to_string(result.nOligonucleotides) + "\n" +
+        to_string(instance.getIdealSpectrum()) + "\n" +
+        to_string(result.sequenceLength) + "\n" +
+        to_string(instance.getOriginalSequenceLength()) + "\n" +
+        to_string(result.computationTime) + "\n" +
+        result.sequence + "\n";
+    
+    for (auto &oligo : result.oligonucleotidesUsed) {
+        resultLog += "    " + c.convert(oligo->getValue()) + "\n";
+    }
+    
+    return resultLog;
+}

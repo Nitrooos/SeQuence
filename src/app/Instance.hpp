@@ -10,7 +10,7 @@ class Instance {
     vector<string> split(string const& s, char delim);
 
     string name;
-    int positiveErrors, negativeErrors, n;
+    int positiveErrors, negativeErrors, n, idealSpectrum;
 
     public:
         Instance(string filename);
@@ -19,6 +19,7 @@ class Instance {
         int getPositiveErrors() const { return positiveErrors; }
         int getNegativeErrors() const { return negativeErrors; }
         int getOriginalSequenceLength() const { return n; }
+        int getIdealSpectrum() const { return idealSpectrum; }
 };
 
 #endif

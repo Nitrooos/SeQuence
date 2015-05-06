@@ -2,6 +2,7 @@
 #define SEQUENCING_ALGORITHM
 
 #include "../task/Statistic.hpp"
+#include "../task/Result.hpp"
 
 class Graph;
 
@@ -11,7 +12,12 @@ class GraphAlgorithm {
         virtual void run(Graph const& g) = 0;
 };
 
-class SequencingAlgorithm : public GraphAlgorithm { };
+class SequencingAlgorithm : public GraphAlgorithm {
+    Result result;
+    
+    public:
+        virtual Result const& getResult() const { return result; }
+};
 
 class StatisticAlgorithm : public GraphAlgorithm {
     public:

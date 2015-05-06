@@ -1,6 +1,5 @@
 #include "GraphAlgorithm.hpp"
 #include "Graph.hpp"
-#include "../helper/Logger.hpp"
 #include "../helper/Converter.hpp"
 #include "../app/Options.hpp"
 
@@ -18,7 +17,7 @@ Vertex *DFS::getNonVisitedSuccessor(const Vertex *current) {
     return nullptr;
 }
 
-void DFS::run(Graph const& g) {    
+void DFS::run(Graph const& g) {
     vertexesInfo.clear();
     for (auto &v : g.getVertexes())
         vertexesInfo.insert(make_pair(&v, VertexInfo()));
@@ -85,7 +84,4 @@ list<const Vertex*> DetermineBeginningVertexes::getBeginningVertexes() const {
 SimpleHeuristic::SimpleHeuristic() { }
 
 void SimpleHeuristic::run(Graph const& g) {
-    Logger l;
-    l.log(InstanceLoadedEvent(Options::getInstance().getInstanceFilename()));
-    l.saveResult(ResultEvent());
 }

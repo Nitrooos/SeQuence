@@ -4,8 +4,6 @@
 #include <sstream>
 
 Instance::Instance(string file) : name(file), positiveErrors(0), negativeErrors(0), n(0) {
-    int idealSpectrum;
-
     vector<string> tokens = split(name, '/');
     tokens = split(tokens.back(), '.');
 
@@ -16,7 +14,7 @@ Instance::Instance(string file) : name(file), positiveErrors(0), negativeErrors(
     } else {
         this->negativeErrors = stoul(tokens[1], nullptr);
     }
-    idealSpectrum = stoul(tokens[0], nullptr);
+    this->idealSpectrum = stoul(tokens[0], nullptr);
     this->n = idealSpectrum + Options::getInstance().getBasePairsPerOligonucleotide() - 1;
 }
 
