@@ -8,6 +8,9 @@ map<string, string> Parser::setProgramOptions(int argc, char *argv[]) {
     char tmp;
     std::map<string, string> options;
 
+    if (argc < 3)
+        showHelpInfo(argv[0]);
+
     while ((tmp = getopt(argc, argv, "df:s:m:t:l:r:")) != -1) {
         switch (tmp) {
             case 'f': case 's': case 'm': case 't': case 'l': case 'r':

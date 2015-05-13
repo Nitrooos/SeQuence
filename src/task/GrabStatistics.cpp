@@ -4,14 +4,11 @@
 #include "../helper/Converter.hpp"
 #include "../helper/Event.hpp"
 
-#include <iostream>
 #include <algorithm>
 
 GrabStatistics::GrabStatistics(Data *data) : Task(data) { }
 
 void GrabStatistics::run() {
-    std::cout << "GrabStatistics::run\n";
-
     fillBasicStatistics();
     statistic.isolatedVertexes = countIsolatedVertexes();
     chooseBestBeginningVertex();
@@ -55,23 +52,8 @@ void GrabStatistics::fillBasicStatistics() {
 }
 
 void GrabStatistics::chooseBestBeginningVertex() {
-    DetermineBeginningVertexes determine;
+    ChooseBestBeginningVertex determine;
     determine.run(*data->graph.get());
-    determine.fillStatistic(statistic);
     
-    list<const Vertex *> potentialBeginningVertexes = determine.getBeginningVertexes();
-    pair<const Vertex*, int> bestVisited;
-    Converter c;
-    
-    for (auto &v : potentialBeginningVertexes) {
-        DFS dfs(v);
-        dfs.run(*data->graph.get());
-        int nVisited = dfs.getVisitedVertexesNumber();
-        if (nVisited > bestVisited.second) {
-            bestVisited.first  = v;
-            bestVisited.second = nVisited;
-        }
-    }
-    
-    statistic.chosenBeginningVertex = bestVisited;
+    statistic.chosenBeginningVertex = determine.getBestBeginningVertex();
 }

@@ -49,6 +49,7 @@ int DFS::getVisitedVertexesNumber() const {
 }
 
         // DetermineBeginningVertex
+        
 DetermineBeginningVertexes::DetermineBeginningVertexes() {}
 
 void DetermineBeginningVertexes::run(Graph const& g) {
@@ -71,12 +72,37 @@ void DetermineBeginningVertexes::run(Graph const& g) {
         potentialBeginningVertexes.push_back(penaltyVector[i].first);
 }
 
-void DetermineBeginningVertexes::fillStatistic(Statistic & s) const {
-    s.potentialBeginningVertexes = potentialBeginningVertexes;
-}
-
 list<const Vertex*> DetermineBeginningVertexes::getBeginningVertexes() const {
     return potentialBeginningVertexes;
+}
+
+        // ChooseBestBeginningVertex
+
+ChooseBestBeginningVertex::ChooseBestBeginningVertex() { }
+
+void ChooseBestBeginningVertex::run(Graph const &g) {
+    DetermineBeginningVertexes determine;
+    determine.run(g);
+    list<const Vertex *> potentialBeginningVertexes = determine.getBeginningVertexes();
+    
+    pair<const Vertex*, int> bestVisited;
+    Converter c;
+    
+    for (auto &v : potentialBeginningVertexes) {
+        DFS dfs(v);
+        dfs.run(g);
+        int nVisited = dfs.getVisitedVertexesNumber();
+        if (nVisited > bestVisited.second) {
+            bestVisited.first  = v;
+            bestVisited.second = nVisited;
+        }
+    }
+    
+    bestBeginningVertex = bestVisited;
+}
+
+pair<const Vertex*, int> ChooseBestBeginningVertex::getBestBeginningVertex() const {
+    return bestBeginningVertex;
 }
 
         // SimpleHeuristic

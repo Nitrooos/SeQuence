@@ -10,11 +10,6 @@ string StatisticsGeneratedEvent::getMessage() const {
     "    Isolated vertexes: " + to_string(statistic.isolatedVertexes) + "\n";
     
     Converter c;
-    result += "    Best potential beginning vertexes:\n";
-    for (auto &potentialBeginningVertex : statistic.potentialBeginningVertexes) {
-        result += "        " + c.convert(potentialBeginningVertex->getValue()) + "\n";
-    }
-    
     result += "    Started from vertex: " + c.convert(statistic.chosenBeginningVertex.first->getValue()) +
               " and visited " + to_string(statistic.chosenBeginningVertex.second) + " vertexes\n";
     

@@ -40,14 +40,22 @@ class DFS : GraphAlgorithm {
         int getVisitedVertexesNumber() const;
 };
 
-class DetermineBeginningVertexes : public StatisticAlgorithm {
+class DetermineBeginningVertexes : public GraphAlgorithm {
     list<const Vertex*> potentialBeginningVertexes;
     
     public:
         DetermineBeginningVertexes();
         void run(Graph const& g);
-        void fillStatistic(Statistic & s) const;
         list<const Vertex*> getBeginningVertexes() const;
+};
+
+class ChooseBestBeginningVertex : public GraphAlgorithm {
+    pair<const Vertex*, int> bestBeginningVertex;
+    
+    public:
+        ChooseBestBeginningVertex();
+        void run(Graph const& g);
+        pair<const Vertex*, int> getBestBeginningVertex() const;
 };
 
 class SimpleHeuristic : public SequencingAlgorithm {

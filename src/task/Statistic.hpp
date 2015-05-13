@@ -12,7 +12,6 @@ struct Statistic {
     int vertexes, arches, isolatedVertexes;
     double density, avgSuccessors;
     map<int, int> successorsByType;
-    list<const Vertex*> potentialBeginningVertexes;
     pair<const Vertex*, int> chosenBeginningVertex;
 };
 

@@ -16,11 +16,11 @@ void SequenceTask::run() {
 
     timer.start();
     data->graph.get()->runAlgorithm();
-    auto result = algorithm.get()->getResult();
+    auto results = algorithm.get()->getResult();
     timer.stop();
 
     data->computationTime += timer.getTime();
     
     Logger l;
-    l.saveResult(ResultEvent(*data->instance.get(), result, data->computationTime));
+    l.saveResult(ResultEvent(*data->instance.get(), results, data->computationTime));
 }
