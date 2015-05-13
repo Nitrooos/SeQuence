@@ -9,6 +9,7 @@
 struct Data {
     unique_ptr<Graph> graph;
     unique_ptr<Instance> instance;
+    long double computationTime{0.0};
 };
 
 #endif

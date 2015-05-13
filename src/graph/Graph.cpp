@@ -5,7 +5,9 @@
 #include "../helper/Converter.hpp"
 #include <iostream>
 
-Graph::Graph(string instanceFile) {
+Graph::Graph() { }
+
+void Graph::load(string instanceFile) {
     InstanceLoader loader;
     loader.run(instanceFile, this->vertexes);
 }

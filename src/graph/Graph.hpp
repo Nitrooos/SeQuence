@@ -11,14 +11,13 @@
 using namespace std;
 
 class Graph {
-    Graph() = delete;
-
     list<Vertex> vertexes;
     unique_ptr<GraphAlgorithm> algorithm;
 
     public:
-        Graph(string filename);
+        Graph();
 
+        void load(string filename);
         list<Vertex> const& getVertexes() const;
         void setGraphAlgorithm(GraphAlgorithm *alg);
         void runAlgorithm() const;

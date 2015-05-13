@@ -14,7 +14,7 @@ Application::Application(int argc, char *argv[]) : argc(argc), argv(argv) {
     Options::getInstance().load(argc, argv);
 
     string instanceFilename = Options::getInstance().getInstanceFilename();
-    data.graph.reset(new Graph(instanceFilename));
+    data.graph.reset(new Graph());
     data.instance.reset(new Instance(instanceFilename));
     
     Logger l;

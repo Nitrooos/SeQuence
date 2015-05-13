@@ -39,7 +39,7 @@ string ResultEvent::getMessage() const {
         to_string(instance.getIdealSpectrum()) + "\n" +
         to_string(result.sequenceLength) + "\n" +
         to_string(instance.getOriginalSequenceLength()) + "\n" +
-        to_string(result.computationTime) + "\n" +
+        to_string(computationTime) + "\n" +
         result.sequence + "\n";
     
     for (auto &oligo : result.oligonucleotidesUsed) {

@@ -17,8 +17,10 @@ class Event {
 class ResultEvent : public Event {
     Result result;
     Instance instance;
+    long double computationTime;
     public:
-        ResultEvent(Instance const& instance, Result const& result) : instance(instance), result(result) { }
+        ResultEvent(Instance const& instance, Result const& result, long double computationTime)
+            : instance(instance), result(result), computationTime(computationTime) { }
         string getMessage() const;
 };
 
