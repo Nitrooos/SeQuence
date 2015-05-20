@@ -128,17 +128,17 @@ void SimpleHeuristic::run(Graph const& g) {
     const Vertex *begin = algorithm.getBestBeginningVertex().first;
     
     vStack.push(begin);
-    current_result.oligonucleotidesUsed.push_back(begin);
+    current_result.addOligonucleotide(begin);
     vertexesInfo[begin].visited = true;
 
-    const int BASE_PAIRS_PER_OLIGONUCLEOTIDE = Options::getInstance().getBasePairsPerOligonucleotide()
+    const int BASE_PAIRS_PER_OLIGONUCLEOTIDE = Options::getInstance().getBasePairsPerOligonucleotide();
     int current_length = BASE_PAIRS_PER_OLIGONUCLEOTIDE;
     while (current_length < maxLength) {
         int min_common_part = BASE_PAIRS_PER_OLIGONUCLEOTIDE - (maxLength - current_length);
         auto nextVertex = chooseNextVertex(vStack.top(), min_common_part);
         if (nextVertex.first != nullptr) {
             vStack.push(nextVertex.first);
-            current_result.oligonucleotidesUsed.push_back(nextVertex.first);
+            current_result.addOligonucleotide(nextVertex.first);
             vertexesInfo[nextVertex.first].visited = true;
             current_length += BASE_PAIRS_PER_OLIGONUCLEOTIDE - nextVertex.second;
         } else
@@ -146,10 +146,10 @@ void SimpleHeuristic::run(Graph const& g) {
     }
     
     Converter c;
-    for (auto o : current_result.oligonucleotidesUsed) {
+    for (auto o : current_result.getUsedOligonucleotides()) {
         std::cout << c.convert(o->getValue()) << "\n";
     }
-    std::cout << "\nWykorzystano " << current_result.oligonucleotidesUsed.size() << " oligonukleotydów ze spektrum\n";
+    std::cout << "\nWykorzystano " << current_result.getUsedOligonucleotides().size() << " oligonukleotydów ze spektrum\n";
     std::cout << "current_length: " << current_length << "\n";
     
     results.push_back(current_result);
