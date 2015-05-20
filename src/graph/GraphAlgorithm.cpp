@@ -3,6 +3,7 @@
 #include "../helper/Converter.hpp"
 #include "../app/Options.hpp"
 
+#include <iostream>
 #include <stack>
 #include <algorithm>
 
@@ -107,7 +108,49 @@ pair<const Vertex*, int> ChooseBestBeginningVertex::getBestBeginningVertex() con
 
         // SimpleHeuristic
 
-SimpleHeuristic::SimpleHeuristic() { }
+SimpleHeuristic::SimpleHeuristic(int maxLength) : maxLength(maxLength) { }
+
+pair<const Vertex*, int> SimpleHeuristic::chooseNextVertex(const Vertex *current, int minCommonPart) {
+    for (auto succ : current->getSuccessors()) {
+        if (vertexesInfo[succ.first].visited == false && succ.second >= minCommonPart) {
+            return succ;
+        }
+    }
+    return make_pair(nullptr, 0);
+}
 
 void SimpleHeuristic::run(Graph const& g) {
+    stack<const Vertex*> vStack;
+    Result current_result;
+    
+    ChooseBestBeginningVertex algorithm;
+    algorithm.run(g);
+    const Vertex *begin = algorithm.getBestBeginningVertex().first;
+    
+    vStack.push(begin);
+    current_result.oligonucleotidesUsed.push_back(begin);
+    vertexesInfo[begin].visited = true;
+
+    const int BASE_PAIRS_PER_OLIGONUCLEOTIDE = Options::getInstance().getBasePairsPerOligonucleotide()
+    int current_length = BASE_PAIRS_PER_OLIGONUCLEOTIDE;
+    while (current_length < maxLength) {
+        int min_common_part = BASE_PAIRS_PER_OLIGONUCLEOTIDE - (maxLength - current_length);
+        auto nextVertex = chooseNextVertex(vStack.top(), min_common_part);
+        if (nextVertex.first != nullptr) {
+            vStack.push(nextVertex.first);
+            current_result.oligonucleotidesUsed.push_back(nextVertex.first);
+            vertexesInfo[nextVertex.first].visited = true;
+            current_length += BASE_PAIRS_PER_OLIGONUCLEOTIDE - nextVertex.second;
+        } else
+            break;
+    }
+    
+    Converter c;
+    for (auto o : current_result.oligonucleotidesUsed) {
+        std::cout << c.convert(o->getValue()) << "\n";
+    }
+    std::cout << "\nWykorzystano " << current_result.oligonucleotidesUsed.size() << " oligonukleotydów ze spektrum\n";
+    std::cout << "current_length: " << current_length << "\n";
+    
+    results.push_back(current_result);
 }

@@ -13,15 +13,11 @@ class GraphAlgorithm {
 };
 
 class SequencingAlgorithm : public GraphAlgorithm {
-    Result result;
+    protected:
+        list<Result> results;
     
     public:
-        virtual Result const& getResult() const { return result; }
-};
-
-class StatisticAlgorithm : public GraphAlgorithm {
-    public:
-        virtual void fillStatistic(Statistic & s) const = 0;
+        virtual list<Result> const& getResults() const { return results; }
 };
 
 class DFS : GraphAlgorithm {
@@ -59,8 +55,17 @@ class ChooseBestBeginningVertex : public GraphAlgorithm {
 };
 
 class SimpleHeuristic : public SequencingAlgorithm {
+    struct VertexInfo {
+        bool visited{false};
+    };
+    
+    pair<const Vertex*, int> chooseNextVertex(const Vertex *current, int minCommonPart);
+    
+    map<const Vertex*, VertexInfo> vertexesInfo;
+    int maxLength;
+    
     public:
-        SimpleHeuristic();
+        SimpleHeuristic(int maxLength);
         void run(Graph const& g);
 };
 
