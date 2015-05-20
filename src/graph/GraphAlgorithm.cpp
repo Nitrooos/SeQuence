@@ -128,7 +128,7 @@ void SimpleHeuristic::run(Graph const& g) {
     const Vertex *begin = algorithm.getBestBeginningVertex().first;
     
     vStack.push(begin);
-    current_result.addOligonucleotide(begin);
+    current_result.addOligonucleotide(make_pair(begin, 0));
     vertexesInfo[begin].visited = true;
 
     const int BASE_PAIRS_PER_OLIGONUCLEOTIDE = Options::getInstance().getBasePairsPerOligonucleotide();
@@ -138,19 +138,13 @@ void SimpleHeuristic::run(Graph const& g) {
         auto nextVertex = chooseNextVertex(vStack.top(), min_common_part);
         if (nextVertex.first != nullptr) {
             vStack.push(nextVertex.first);
-            current_result.addOligonucleotide(nextVertex.first);
+            current_result.addOligonucleotide(nextVertex);
             vertexesInfo[nextVertex.first].visited = true;
             current_length += BASE_PAIRS_PER_OLIGONUCLEOTIDE - nextVertex.second;
         } else
             break;
     }
     
-    Converter c;
-    for (auto o : current_result.getUsedOligonucleotides()) {
-        std::cout << c.convert(o->getValue()) << "\n";
-    }
-    std::cout << "\nWykorzystano " << current_result.getUsedOligonucleotides().size() << " oligonukleotydów ze spektrum\n";
-    std::cout << "current_length: " << current_length << "\n";
-    
+    current_result.recalculate();
     results.push_back(current_result);
 }

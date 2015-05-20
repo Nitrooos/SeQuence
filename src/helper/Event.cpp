@@ -29,16 +29,16 @@ string ResultEvent::getMessage() const {
     Converter c;
     string resultLog =
         instance.getName() + "\n" +
-        c.convert(result.getUsedOligonucleotides().front()->getValue()) + "\n" +
+        c.convert(result.getUsedOligonucleotides().front().first->getValue()) + "\n" +
         to_string(result.getNumberOfUsedOligonucleotides()) + "\n" +
-        to_string(instance.getIdealSpectrum()) + "\n" +
+        to_string(instance.getIdealNumberOfUsedOligonucleotides()) + "\n" +
         to_string(result.getSequenceLength()) + "\n" +
         to_string(instance.getOriginalSequenceLength()) + "\n" +
         to_string(computationTime) + "\n" +
         result.getSequence() + "\n";
     
     for (auto &oligo : result.getUsedOligonucleotides()) {
-        resultLog += "    " + c.convert(oligo->getValue()) + "\n";
+        resultLog += "    " + c.convert(oligo.first->getValue()) + "\n";
     }
     
     return resultLog;

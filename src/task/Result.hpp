@@ -12,16 +12,16 @@ class Result {
     int sequenceLength{0},
         nOligonucleotides{0};
     string sequence;
-    list <const Vertex*> oligonucleotidesUsed;
+    list<pair<const Vertex*, int>> oligonucleotidesUsed;
     
     public:
-        void addOligonucleotide(const Vertex *o);
+        void addOligonucleotide(pair<const Vertex*, int> const& o);
         void recalculate();
         
         int getSequenceLength() const                        { return sequenceLength;       }
         int getNumberOfUsedOligonucleotides() const          { return nOligonucleotides;    }
         string getSequence() const                           { return sequence;             }
-        list<const Vertex*> const& getUsedOligonucleotides() const { return oligonucleotidesUsed; }
+        list<pair<const Vertex*, int>> const& getUsedOligonucleotides() const { return oligonucleotidesUsed; }
 };
 
 #endif

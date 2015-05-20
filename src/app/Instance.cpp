@@ -16,6 +16,7 @@ Instance::Instance(string file) : name(file), positiveErrors(0), negativeErrors(
     }
     this->idealSpectrum = stoul(tokens[0], nullptr);
     this->n = idealSpectrum + Options::getInstance().getBasePairsPerOligonucleotide() - 1;
+    this->idealUsedOligonucleotides = idealSpectrum - negativeErrors;
 }
 
 vector<string> Instance::split(string const& s, char delim) {
