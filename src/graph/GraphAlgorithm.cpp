@@ -60,8 +60,8 @@ void DetermineBeginningVertexes::run(Graph const& g) {
     
     for (auto &v : g.getVertexes())
         for (auto &succ : v.getSuccessors()) {
-            penaltyPoints[succ.first] += succ.second;
-            penaltyPoints[&v] -= succ.second/2;
+            penaltyPoints[succ.first] += succ.second*succ.second;
+            penaltyPoints[&v] -= 5*succ.second;
         }
     
     vector<pair<const Vertex*, int>> penaltyVector(penaltyPoints.begin(), penaltyPoints.end());
@@ -111,12 +111,18 @@ pair<const Vertex*, int> ChooseBestBeginningVertex::getBestBeginningVertex() con
 SimpleHeuristic::SimpleHeuristic(int maxLength) : maxLength(maxLength) { }
 
 pair<const Vertex*, int> SimpleHeuristic::chooseNextVertex(const Vertex *current, int minCommonPart) {
+    pair<const Vertex*, int> alternative_vertex = make_pair(nullptr, 0);
     for (auto succ : current->getSuccessors()) {
-        if (vertexesInfo[succ.first].visited == false && succ.second >= minCommonPart) {
-            return succ;
+        if (succ.second >= minCommonPart) {
+            if (vertexesInfo[succ.first].visited) {
+                if (alternative_vertex.first == nullptr)
+                    alternative_vertex = succ;
+            } else {
+                return succ;
+            }
         }
     }
-    return make_pair(nullptr, 0);
+    return alternative_vertex;
 }
 
 void SimpleHeuristic::run(Graph const& g) {

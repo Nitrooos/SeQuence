@@ -37,9 +37,9 @@ string ResultEvent::getMessage() const {
         to_string(computationTime) + "\n" +
         result.getSequence() + "\n";
     
-    for (auto &oligo : result.getUsedOligonucleotides()) {
+    /*for (auto &oligo : result.getUsedOligonucleotides()) {
         resultLog += "    " + c.convert(oligo.first->getValue()) + "\n";
-    }
+    }*/
     
     return resultLog;
 }
