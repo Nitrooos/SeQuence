@@ -15,7 +15,7 @@ class Result {
     list<pair<const Vertex*, int>> oligonucleotidesUsed;
     
     public:
-        void addOligonucleotide(pair<const Vertex*, int> const& o);
+        void addOligonucleotide(pair<const Vertex*, int> const& o, bool visited);
         void recalculate();
         
         int getSequenceLength() const                        { return sequenceLength;       }

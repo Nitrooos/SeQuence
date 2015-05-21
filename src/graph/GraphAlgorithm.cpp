@@ -120,27 +120,27 @@ pair<const Vertex*, int> SimpleHeuristic::chooseNextVertex(const Vertex *current
 }
 
 void SimpleHeuristic::run(Graph const& g) {
-    stack<const Vertex*> vStack;
+    stack<const Vertex*> v_stack;
     Result current_result;
     
     ChooseBestBeginningVertex algorithm;
     algorithm.run(g);
     const Vertex *begin = algorithm.getBestBeginningVertex().first;
     
-    vStack.push(begin);
-    current_result.addOligonucleotide(make_pair(begin, 0));
+    v_stack.push(begin);
+    current_result.addOligonucleotide(make_pair(begin, 0), false);
     vertexesInfo[begin].visited = true;
 
     const int BASE_PAIRS_PER_OLIGONUCLEOTIDE = Options::getInstance().getBasePairsPerOligonucleotide();
     int current_length = BASE_PAIRS_PER_OLIGONUCLEOTIDE;
     while (current_length < maxLength) {
         int min_common_part = BASE_PAIRS_PER_OLIGONUCLEOTIDE - (maxLength - current_length);
-        auto nextVertex = chooseNextVertex(vStack.top(), min_common_part);
-        if (nextVertex.first != nullptr) {
-            vStack.push(nextVertex.first);
-            current_result.addOligonucleotide(nextVertex);
-            vertexesInfo[nextVertex.first].visited = true;
-            current_length += BASE_PAIRS_PER_OLIGONUCLEOTIDE - nextVertex.second;
+        auto next_vertex = chooseNextVertex(v_stack.top(), min_common_part);
+        if (next_vertex.first != nullptr) {
+            v_stack.push(next_vertex.first);
+            current_result.addOligonucleotide(next_vertex, vertexesInfo[next_vertex.first].visited);
+            vertexesInfo[next_vertex.first].visited = true;
+            current_length += BASE_PAIRS_PER_OLIGONUCLEOTIDE - next_vertex.second;
         } else
             break;
     }
