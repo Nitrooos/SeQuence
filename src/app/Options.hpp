@@ -15,9 +15,7 @@ class Options {
            logFilename,
            resultsFilename;
     int minCommonPart,
-        basePairsPerOligonucleotide,
-        solutionsNumber,
-        timeout;
+        basePairsPerOligonucleotide;
     bool debugMode;
 
     public:
@@ -32,8 +30,6 @@ class Options {
         string getResultsFilename();
         int getMinCommonPart();
         int getBasePairsPerOligonucleotide();
-        int getSolutionsNumber();
-        int getTimeout();
         bool getDebugMode();
         constexpr static int getBytesPerInt() { return sizeof(int); }
 };

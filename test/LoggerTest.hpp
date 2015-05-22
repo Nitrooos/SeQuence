@@ -13,8 +13,8 @@ class LoggerTest : public CppUnit::TestCase {
     public:
         void log() {
             Logger l;
-            l.log(InstanceLoadedEvent("data/instances/9.200-40"));
-            l.log(InstanceLoadedEvent("data/instances/53.500+200"));
+            l.log(InstanceLoadedEvent("data/negative/9.200-40"));
+            l.log(InstanceLoadedEvent("data/positive-hard/53.500+200"));
 
             ifstream L("output/log");
             string temp;

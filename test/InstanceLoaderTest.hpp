@@ -16,7 +16,7 @@ class InstanceLoaderTest : public CppUnit::TestCase {
             InstanceLoader loader;
             Converter c;
             list<Vertex> v;
-            loader.run("data/instances/9.200-40", v);
+            loader.run("data/negative/9.200-40", v);
 
             auto it = v.begin();
 

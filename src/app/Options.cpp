@@ -3,7 +3,7 @@
 #include "../Exceptions.hpp"
 
 Options::Options()
-    : minCommonPart(7), basePairsPerOligonucleotide(10), solutionsNumber(10), timeout(-1),
+    : minCommonPart(7), basePairsPerOligonucleotide(10),
       logFilename("output/log"), resultsFilename("output/results"), debugMode(false) {}
 
 Options& Options::getInstance() {
@@ -21,12 +21,8 @@ void Options::load(int argc, char *argv[]) {
     if (options.find("r") != options.end())
         this->resultsFilename = options["r"];
 
-    if (options.find("s") != options.end())
-        this->solutionsNumber = stoul(options["s"]);
     if (options.find("m") != options.end())
         this->minCommonPart = stoul(options["m"]);
-    if (options.find("t") != options.end())
-        this->timeout = stoul(options["t"]);
     
     if (options.find("d") != options.end())
         this->debugMode = true;
@@ -54,14 +50,6 @@ int Options::getMinCommonPart() {
 
 int Options::getBasePairsPerOligonucleotide() {
     return basePairsPerOligonucleotide;
-}
-
-int Options::getSolutionsNumber() {
-    return solutionsNumber;
-}
-
-int Options::getTimeout() {
-    return timeout;
 }
 
 bool Options::getDebugMode() {

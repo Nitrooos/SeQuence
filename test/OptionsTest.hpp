@@ -7,12 +7,12 @@ class OptionsTest : public CppUnit::TestCase {
 
     public:
         void argumentsTest() {
-            char *argv[] = { "debug/SeQuence", "-s", "11", "-m", "8", "-t", "100" };
+            char *argv[] = { "debug/SeQuence", "-m", "8", "-l", "mylog.txt", "-f", "data/negative/9.200-40" };
             Options::getInstance().load(7, argv);
 
-            CPPUNIT_ASSERT(Options::getInstance().getSolutionsNumber() == 11);
             CPPUNIT_ASSERT(Options::getInstance().getMinCommonPart() == 8);
-            CPPUNIT_ASSERT(Options::getInstance().getTimeout() == 100);
+            CPPUNIT_ASSERT(Options::getInstance().getLogFilename() == "mylog.txt");
+            CPPUNIT_ASSERT(Options::getInstance().getInstanceFilename() == "data/negative/9.200-40");
         }
 };
 
