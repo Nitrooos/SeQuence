@@ -77,7 +77,7 @@ void DetermineBeginningVertexes::run(Graph const& g) {
         return l.second < r.second;
     });
     
-    for (int i = 0; i < 10; ++i)
+    for (int i = 0; i < int(0.1*g.getVertexes().size()); ++i)
         potentialBeginningVertexes.push_back(penaltyVector[i].first);
 }
 
