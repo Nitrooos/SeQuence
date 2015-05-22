@@ -60,8 +60,16 @@ void DetermineBeginningVertexes::run(Graph const& g) {
     
     for (auto &v : g.getVertexes())
         for (auto &succ : v.getSuccessors()) {
-            penaltyPoints[succ.first] += succ.second*succ.second;
-            penaltyPoints[&v] -= 5*succ.second;
+            int connection_force = Options::getInstance().getBasePairsPerOligonucleotide() - succ.second,
+                penalty;
+            switch (connection_force) {
+                case 1:  penalty = 50; break;
+                case 2:  penalty = 10; break;
+                case 3:  penalty =  1; break;
+                default: penalty =  0; break;
+            }
+            penaltyPoints[succ.first] += penalty;
+            penaltyPoints[&v] -= penalty;
         }
     
     vector<pair<const Vertex*, int>> penaltyVector(penaltyPoints.begin(), penaltyPoints.end());
@@ -110,7 +118,9 @@ pair<const Vertex*, int> ChooseBestBeginningVertex::getBestBeginningVertex() con
 
 SimpleHeuristic::SimpleHeuristic(int maxLength) : maxLength(maxLength) { }
 
-pair<const Vertex*, int> SimpleHeuristic::chooseNextVertex(const Vertex *current, int minCommonPart) {
+pair<const Vertex*, int> SimpleHeuristic::chooseNextVertex(const Vertex *current,
+    map<const Vertex*, VertexInfo> & vertexesInfo, int minCommonPart)
+{
     pair<const Vertex*, int> alternative_vertex = make_pair(nullptr, 0);
     for (auto succ : current->getSuccessors()) {
         if (succ.second >= minCommonPart) {
@@ -125,32 +135,39 @@ pair<const Vertex*, int> SimpleHeuristic::chooseNextVertex(const Vertex *current
     return alternative_vertex;
 }
 
-void SimpleHeuristic::run(Graph const& g) {
-    stack<const Vertex*> v_stack;
-    Result current_result;
-    
-    ChooseBestBeginningVertex algorithm;
-    algorithm.run(g);
-    const Vertex *begin = algorithm.getBestBeginningVertex().first;
-    
-    v_stack.push(begin);
-    current_result.addOligonucleotide(make_pair(begin, 0), false);
-    vertexesInfo[begin].visited = true;
-
+void SimpleHeuristic::startFromNextVertex(const Vertex *beginningVertex) {
+    map<const Vertex*, VertexInfo> vertexes_info;
     const int BASE_PAIRS_PER_OLIGONUCLEOTIDE = Options::getInstance().getBasePairsPerOligonucleotide();
-    int current_length = BASE_PAIRS_PER_OLIGONUCLEOTIDE;
+    Result current_result;
+    int current_length = 0;
+    
+    const Vertex *current_vertex = beginningVertex;
+    current_result.addOligonucleotide(make_pair(current_vertex, 0), false);
+    current_length += BASE_PAIRS_PER_OLIGONUCLEOTIDE;
+    vertexes_info[current_vertex].visited = true;
+
     while (current_length < maxLength) {
         int min_common_part = BASE_PAIRS_PER_OLIGONUCLEOTIDE - (maxLength - current_length);
-        auto next_vertex = chooseNextVertex(v_stack.top(), min_common_part);
+        auto next_vertex = chooseNextVertex(current_vertex, vertexes_info, min_common_part);
         if (next_vertex.first != nullptr) {
-            v_stack.push(next_vertex.first);
-            current_result.addOligonucleotide(next_vertex, vertexesInfo[next_vertex.first].visited);
-            vertexesInfo[next_vertex.first].visited = true;
+            current_result.addOligonucleotide(next_vertex, vertexes_info[next_vertex.first].visited);
             current_length += BASE_PAIRS_PER_OLIGONUCLEOTIDE - next_vertex.second;
+            vertexes_info[next_vertex.first].visited = true;
+            current_vertex = next_vertex.first;
         } else
             break;
     }
     
     current_result.recalculate();
-    results.push_back(current_result);
+    results.push_back(current_result);    
+}
+
+void SimpleHeuristic::run(Graph const& g) {
+    DetermineBeginningVertexes algorithm;
+    algorithm.run(g);
+    list<const Vertex*> potentialBeginningVertexes = algorithm.getBeginningVertexes();
+    
+    for (auto v : potentialBeginningVertexes) {
+        startFromNextVertex(v);
+    }
 }

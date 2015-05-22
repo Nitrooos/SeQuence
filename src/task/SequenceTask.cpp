@@ -22,5 +22,7 @@ void SequenceTask::run() {
     data->computationTime += timer.getTime();
     
     Logger l;
-    l.saveResult(ResultEvent(*data->instance.get(), results.front(), data->computationTime));
+    for (auto res : results) {
+        l.saveResult(ResultEvent(*data->instance.get(), res, data->computationTime));
+    }
 }

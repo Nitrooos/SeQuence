@@ -59,9 +59,10 @@ class SimpleHeuristic : public SequencingAlgorithm {
         bool visited{false};
     };
     
-    pair<const Vertex*, int> chooseNextVertex(const Vertex *current, int minCommonPart);
+    pair<const Vertex*, int> chooseNextVertex(const Vertex *current,
+        map<const Vertex*, VertexInfo> & vertexesInfo, int minCommonPart);
+    void startFromNextVertex(const Vertex *v);
     
-    map<const Vertex*, VertexInfo> vertexesInfo;
     int maxLength;
     
     public:
