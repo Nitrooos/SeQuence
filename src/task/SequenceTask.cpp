@@ -21,8 +21,10 @@ void SequenceTask::run() {
 
     data->computationTime += timer.getTime();
     
+    results.sort([] (Result const& r1, Result const& r2) {
+        return r1.getNumberOfUsedOligonucleotides() > r2.getNumberOfUsedOligonucleotides();
+    });
+    
     Logger l;
-    for (auto res : results) {
-        l.saveResult(ResultEvent(*data->instance.get(), res, data->computationTime));
-    }
+    l.saveResult(ResultEvent(*data->instance.get(), results.front(), data->computationTime));
 }
