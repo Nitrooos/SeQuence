@@ -28,6 +28,7 @@ void Logger::writeBasicInfoOnBegin() {
                 << "# Every result is described as below:\n"
                 << "#     instance name\n"
                 << "#     used starting oligonucleotide\n"
+                << "#     percent of used from ideal\n"
                 << "#     number of used oligonucleotides from spectrum\n"
                 << "#     ideal number of used oligonucleotides\n"
                 << "#     length of computed sequence\n"

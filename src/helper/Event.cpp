@@ -30,6 +30,7 @@ string ResultEvent::getMessage() const {
     string resultLog =
         instance.getName() + "\n" +
         c.convert(result.getUsedOligonucleotides().front().first->getValue()) + "\n" +
+        to_string((double)result.getNumberOfUsedOligonucleotides()/instance.getIdealNumberOfUsedOligonucleotides()*100) + "%\n" +
         to_string(result.getNumberOfUsedOligonucleotides()) + "\n" +
         to_string(instance.getIdealNumberOfUsedOligonucleotides()) + "\n" +
         to_string(result.getSequenceLength()) + "\n" +
@@ -37,8 +38,10 @@ string ResultEvent::getMessage() const {
         to_string(computationTime) + "\n" +
         result.getSequence() + "\n";
     
+    int n = 0;
     for (auto &oligo : result.getUsedOligonucleotides()) {
-        resultLog += "    " + c.convert(oligo.first->getValue()) + "\n";
+        resultLog += string(n, ' ') + c.convert(oligo.first->getValue()) + "\n";
+        n++;
     }
     
     return resultLog;
