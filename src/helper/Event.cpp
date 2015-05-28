@@ -1,5 +1,6 @@
 #include "Event.hpp"
 #include "Converter.hpp"
+#include "../app/Options.hpp"
 
 string StatisticsGeneratedEvent::getMessage() const {
     string result =
@@ -38,10 +39,10 @@ string ResultEvent::getMessage() const {
         to_string(computationTime) + "\n" +
         result.getSequence() + "\n";
     
-    int n = 0;
+    int n = -Options::getInstance().getBasePairsPerOligonucleotide();
     for (auto &oligo : result.getUsedOligonucleotides()) {
+        n += Options::getInstance().getBasePairsPerOligonucleotide() - oligo.second;
         resultLog += string(n, ' ') + c.convert(oligo.first->getValue()) + "\n";
-        n++;
     }
     
     return resultLog;
